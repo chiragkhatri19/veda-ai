@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+.next/
+out/
+*.tsbuildinfo
+
+# Environment files — never commit secrets
+.env
+.env.local
+.env.*.local
+apps/api/.env
+apps/web/.env.local
+
+# Keep examples tracked
+!.env.example
+!.env.local.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+coverage/
+
+# Misc
+.cache/
+.local/
+.claude/
+.antigravitycli/
+tmp/
+
+# Planning / status docs (not source)
+CALIBER_CURRENT_STATUS_DELTA.md
+CALIBER_FINAL_VERIFICATION_REPORT.md
+ved_ai_production_readiness.md
+
+# Screenshots
+*.png

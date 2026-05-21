@@ -1,0 +1,16 @@
+{
+  "name": "workspace",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter @veda/api dev\" \"pnpm --filter @veda/web dev\"",
+    "build": "pnpm --filter @veda/shared build && pnpm --filter @veda/api build && pnpm --filter @veda/web build",
+    "typecheck": "pnpm --filter @veda/shared exec tsc --noEmit && pnpm --filter @veda/api exec tsc --noEmit && pnpm --filter @veda/web exec tsc --noEmit"
+  },
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "prettier": "^3.8.3",
+    "typescript": "~5.9.3"
+  }
+}
