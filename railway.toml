@@ -1,0 +1,9 @@
+[build]
+buildCommand = "pnpm install && pnpm --filter @veda/shared build && pnpm --filter @veda/api build"
+
+[deploy]
+startCommand = "pnpm --filter @veda/api start"
+healthcheckPath = "/api/healthz"
+healthcheckTimeout = 30
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
