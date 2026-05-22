@@ -105,4 +105,22 @@ describe('parseAndValidateLLMResponse', () => {
       expect(() => parseAndValidateLLMResponse(JSON.stringify(paper))).not.toThrow();
     }
   });
+
+  it('normalises "Medium" (Gemini capitalisation) to "moderate"', () => {
+    const paper = {
+      ...VALID_PAPER,
+      sections: [{ ...VALID_PAPER.sections[0], questions: [{ ...VALID_PAPER.sections[0].questions[0], difficulty: 'Medium' }] }],
+    };
+    const result = parseAndValidateLLMResponse(JSON.stringify(paper));
+    expect(result.sections[0].questions[0].difficulty).toBe('moderate');
+  });
+
+  it('normalises "Hard" (Gemini capitalisation) to "hard"', () => {
+    const paper = {
+      ...VALID_PAPER,
+      sections: [{ ...VALID_PAPER.sections[0], questions: [{ ...VALID_PAPER.sections[0].questions[0], difficulty: 'Hard' }] }],
+    };
+    const result = parseAndValidateLLMResponse(JSON.stringify(paper));
+    expect(result.sections[0].questions[0].difficulty).toBe('hard');
+  });
 });
