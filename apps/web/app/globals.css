@@ -1,0 +1,302 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design tokens ──────────────────────────────────────────────────── */
+:root {
+  --c-bg:       244 244 245;
+  --c-surface:  255 255 255;
+  --c-surface2: 249 249 250;
+  --c-border:   228 228 231;
+  --c-text1:    9 9 11;
+  --c-text2:    82 82 91;
+  --c-text3:    161 161 170;
+  --c-orange:   249 115 22;
+  --c-brand-dark: 17 17 17;
+}
+
+html.dark {
+  --c-bg:         14 14 17;    /* deep off-black — gives sidebars/surfaces depth */
+  --c-surface:    22 22 26;    /* card surface — visible against bg */
+  --c-surface2:   30 30 36;    /* raised surface — input bg, hover state */
+  --c-border:     44 44 50;    /* border — clearly visible in dark context */
+  --c-text1:      242 242 245; /* near-white — high contrast primary text */
+  --c-text2:      148 148 158; /* secondary — passes WCAG AA on dark surface */
+  --c-text3:      106 106 116; /* muted — passes WCAG AA (≥4.5:1) on dark surface */
+  --c-orange:     249 115 22;  /* brand orange — unchanged */
+  --c-brand-dark: 249 115 22;  /* primary actions flip to orange in dark */
+}
+
+/* Smooth theme transition (class applied temporarily by themeStore) */
+.theme-transition * {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease !important;
+}
+
+/*
+ * Canvas — subtle ambient gradient so backdrop-blur has colour to refract.
+ * The gradients are intentionally very faint: glass cards pick up a barely-
+ * visible warm tint top-left and cool tint bottom-right, matching Apple's
+ * environmental-tint approach without looking designed.
+ */
+.shell-root {
+  background:
+    radial-gradient(ellipse 70% 55% at 5% 0%, rgba(249,115,22,0.04) 0%, transparent 100%),
+    radial-gradient(ellipse 50% 40% at 95% 100%, rgba(99,102,241,0.03) 0%, transparent 100%),
+    rgb(var(--c-bg));
+}
+html.dark .shell-root {
+  background:
+    radial-gradient(ellipse 70% 55% at 5% 0%, rgba(249,115,22,0.07) 0%, transparent 100%),
+    radial-gradient(ellipse 50% 40% at 95% 100%, rgba(139,92,246,0.05) 0%, transparent 100%),
+    rgb(var(--c-bg));
+}
+
+/*
+ * Depth system — elevation layers
+ *
+ * Light: shadows carry elevation cues (darker shadow = higher layer)
+ * Dark:  lightness of the surface itself carries elevation (lighter surface = higher)
+ *        plus an ambient highlight ring on the top edge
+ *
+ * Layer 0 — canvas      app-bg       (light: zinc-100  | dark: near-black)
+ * Layer 1 — content     app-surface  (light: white     | dark: zinc-950-ish)
+ * Layer 2 — sidebar     app-surface  (same color, but shadow lifts it visually)
+ * Layer 3 — overlays    dropdown/modal shadows
+ */
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+@keyframes nav-progress {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(450%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes pingRing {
+  0%        { transform: scale(1);   opacity: 0.55; }
+  80%, 100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@layer base {
+  html {
+    font-family: Inter, system-ui, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Keyboard-only focus rings (not on click) */
+  :focus-visible {
+    outline: 2px solid rgb(249 115 22 / 0.7);
+    outline-offset: 2px;
+    border-radius: 4px;
+    transition: outline-offset 0.1s ease;
+  }
+
+  select {
+    background-image: none;
+  }
+}
+
+/* ─── Reduced-motion: honour the OS preference ───────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+}
+
+@layer utilities {
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 400px 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  html.dark .skeleton {
+    background: linear-gradient(90deg, #27272a 25%, #3f3f46 50%, #27272a 75%);
+    background-size: 400px 100%;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .duration-250 {
+    transition-duration: 250ms;
+  }
+
+  .card-hover {
+    @apply transition-all hover:shadow-md hover:-translate-y-px;
+  }
+
+  /* GPU-composited animations — hint the browser */
+  .animate-float,
+  .animate-orbit,
+  .animate-ping-ring,
+  .animate-spin,
+  .animate-spin-slow {
+    will-change: transform;
+  }
+
+  /* Card-grid entrance stagger — applied per nth-child automatically */
+  .stagger-grid > *:nth-child(1)  { animation-delay:   0ms; }
+  .stagger-grid > *:nth-child(2)  { animation-delay:  55ms; }
+  .stagger-grid > *:nth-child(3)  { animation-delay: 110ms; }
+  .stagger-grid > *:nth-child(4)  { animation-delay: 165ms; }
+  .stagger-grid > *:nth-child(5)  { animation-delay: 220ms; }
+  .stagger-grid > *:nth-child(6)  { animation-delay: 275ms; }
+  .stagger-grid > *:nth-child(7)  { animation-delay: 330ms; }
+  .stagger-grid > *:nth-child(8)  { animation-delay: 385ms; }
+  .stagger-grid > *:nth-child(n+9){ animation-delay: 440ms; }
+
+  /* fill-mode so cards don't flash before their delay fires */
+  .stagger-grid > * { animation-fill-mode: both; }
+}
+
+/* ─── Print ──────────────────────────────────────────────────────────── */
+@page {
+  margin: 1.5cm;
+  size: A4 portrait;
+}
+
+/* Rubric page uses landscape to fit the wide table */
+@page :rubric-landscape {
+  size: A4 landscape;
+  margin: 1cm;
+}
+
+@media print {
+  /* ── Hide all interactive / overlay chrome ──────────────────────── */
+  .no-print,
+  aside,
+  header,
+  nav,
+  [data-sonner-toaster],
+  [data-radix-popper-content-wrapper],
+  [role="dialog"],
+  [role="tooltip"] {
+    display: none !important;
+  }
+
+  /* Suppress every fixed/absolute layer (OS overlays, toasts, modals) */
+  *:not(.question-paper-print):not(.question-paper-print *):not(.rubric-print-area):not(.rubric-print-area *):not(.rubric-print-header):not(.rubric-print-header *) {
+    position: static !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Collapse flex shell so content flows as a block document */
+  body > div,
+  .shell-root {
+    display: block !important;
+    background: white !important;
+  }
+
+  main {
+    display: block !important;
+    padding: 0 !important;
+    max-width: none !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  /* ── Question paper ──────────────────────────────────────────────── */
+  .question-paper-print {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .question-paper-print > div {
+    background-color: white !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .question-paper-print * {
+    color: black !important;
+    border-color: #d1d5db !important;
+    background-color: transparent !important;
+  }
+
+  /* Section header: force centre-align even when parent margin resets */
+  .question-paper-print .section-block-header {
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Section divider: collapse the double-line into a single centred rule */
+  .question-paper-print .section-divider {
+    display: block !important;
+    text-align: center !important;
+    border-top: 1px solid #9ca3af !important;
+    margin: 24px 0 !important;
+  }
+
+  .question-paper-print .section-divider > * {
+    display: none !important;
+  }
+
+  /* ── Rubric table ────────────────────────────────────────────────── */
+  .rubric-print-area {
+    overflow: visible !important;
+    border-radius: 0 !important;
+  }
+
+  .rubric-print-area table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    font-size: 10px !important;
+  }
+
+  .rubric-print-area th,
+  .rubric-print-area td {
+    border: 1px solid #9ca3af !important;
+    padding: 6px 8px !important;
+    color: black !important;
+    background: white !important;
+    vertical-align: top !important;
+    line-height: 1.4 !important;
+  }
+
+  .rubric-print-area th {
+    background: #f3f4f6 !important;
+    font-weight: 600 !important;
+  }
+
+  .rubric-print-header {
+    margin-bottom: 12px !important;
+  }
+
+  .print-expand {
+    display: block !important;
+  }
+}
