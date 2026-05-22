@@ -14,6 +14,7 @@ interface AssignmentState {
 
 interface AssignmentActions {
   setAssignments: (assignments: Assignment[]) => void;
+  appendAssignments: (assignments: Assignment[]) => void;
   setCurrentAssignment: (assignment: Assignment | null) => void;
   updateAssignment: (assignment: Assignment) => void;
   setCreateFormData: (data: Partial<CreateAssignmentInput>) => void;
@@ -41,6 +42,13 @@ export const useAssignmentStore = create<AssignmentState & AssignmentActions>()(
     setAssignments: (assignments) =>
       set((state) => {
         state.assignments = assignments;
+      }),
+
+    appendAssignments: (assignments) =>
+      set((state) => {
+        const existingIds = new Set(state.assignments.map((a) => a.id));
+        const newOnes = assignments.filter((a) => !existingIds.has(a.id));
+        state.assignments.push(...newOnes);
       }),
 
     setCurrentAssignment: (assignment) =>

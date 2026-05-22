@@ -1,14 +1,30 @@
 import { Assignment } from '../models/assignment.model.js';
 import type { CreateAssignmentInput, Assignment as AssignmentType } from '@veda/shared';
 
+export interface PaginatedResult {
+  data: AssignmentType[];
+  total: number;
+  page: number;
+  totalPages: number;
+}
+
 function toApiShape(doc: unknown): AssignmentType {
   return doc as AssignmentType;
 }
 
 export const assignmentService = {
-  async findAll(): Promise<AssignmentType[]> {
-    const docs = await Assignment.find().sort({ createdAt: -1 }).exec();
-    return docs.map((d) => toApiShape(d.toJSON()));
+  async findAllPaginated(page: number, limit: number): Promise<PaginatedResult> {
+    const skip = (page - 1) * limit;
+    const [docs, total] = await Promise.all([
+      Assignment.find().sort({ createdAt: -1 }).skip(skip).limit(limit).exec(),
+      Assignment.countDocuments().exec(),
+    ]);
+    return {
+      data: docs.map((d) => toApiShape(d.toJSON())),
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+    };
   },
 
   async findById(id: string): Promise<AssignmentType | null> {

@@ -8,6 +8,13 @@ export interface CreateAssignmentResponse {
   links: { status: string; websocket: string };
 }
 
+export interface PaginatedAssignments {
+  data: Assignment[];
+  total: number;
+  page: number;
+  totalPages: number;
+}
+
 const http = axios.create({
   baseURL: '',
   headers: { 'Content-Type': 'application/json' },
@@ -25,7 +32,8 @@ http.interceptors.response.use(
 
 export const api = {
   assignments: {
-    list: () => http.get<Assignment[]>('/api/assignments').then((r) => r.data),
+    list: (page = 1, limit = 12) =>
+      http.get<PaginatedAssignments>('/api/assignments', { params: { page, limit } }).then((r) => r.data),
     get: (id: string) => http.get<Assignment>(`/api/assignments/${id}`).then((r) => r.data),
     create: (data: CreateAssignmentInput) =>
       http.post<CreateAssignmentResponse>('/api/assignments', data).then((r) => r.data),

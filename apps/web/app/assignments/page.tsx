@@ -45,7 +45,7 @@ function filterAndSort(
 }
 
 export default function AssignmentsPage() {
-  const { assignments, isLoading, error, hasFetched, refetch, deleteAssignment } =
+  const { assignments, isLoading, error, hasFetched, hasMore, isFetchingMore, refetch, deleteAssignment, loadMore } =
     useAssignments();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -172,9 +172,22 @@ export default function AssignmentsPage() {
         searchQuery={searchQuery}
       />
 
+      {/* Load more */}
+      {hasMore && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={loadMore}
+            disabled={isFetchingMore}
+            className="inline-flex items-center gap-2 px-6 py-2.5 text-[13px] font-medium text-app-text-secondary border border-app-border bg-white rounded-full hover:bg-app-surface-2 active:scale-[0.97] transition-[background-color,transform] duration-100 disabled:opacity-60 shadow-sm"
+          >
+            {isFetchingMore ? 'Loading…' : 'Load more'}
+          </button>
+        </div>
+      )}
+
       {/* Bottom create button */}
       {showFloatingButton && (
-        <div className="flex justify-center mt-8 pb-4">
+        <div className="flex justify-center mt-6 pb-4">
           <Link
             href="/assignments/create"
             className="inline-flex items-center gap-2 px-6 py-2.5 text-[13px] font-semibold text-white bg-brand-dark rounded-full hover:opacity-90 active:scale-[0.97] active:opacity-80 transition-[opacity,transform] duration-150 shadow-sm"

@@ -6,11 +6,16 @@ import { CreateAssignmentSchema } from '../middleware/validate.middleware.js';
 import { logger } from '../utils/logger.js';
 import type { TracedRequest } from '../middleware/trace.middleware.js';
 
+const DEFAULT_LIMIT = 12;
+const MAX_LIMIT = 50;
+
 export const assignmentController = {
-  async list(_req: Request, res: Response, next: NextFunction): Promise<void> {
+  async list(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const assignments = await assignmentService.findAll();
-      res.json(assignments);
+      const page = Math.max(1, Number(req.query.page) || 1);
+      const limit = Math.min(MAX_LIMIT, Math.max(1, Number(req.query.limit) || DEFAULT_LIMIT));
+      const result = await assignmentService.findAllPaginated(page, limit);
+      res.json(result);
     } catch (err) {
       next(err);
     }
