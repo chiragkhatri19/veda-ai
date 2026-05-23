@@ -11,6 +11,7 @@
   "packageManager": "pnpm@9.15.9",
   "devDependencies": {
     "concurrently": "^9.1.2",
+    "next": "14.2.35",
     "prettier": "^3.8.3",
     "typescript": "~5.9.3"
   }

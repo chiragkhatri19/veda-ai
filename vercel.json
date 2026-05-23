@@ -1,4 +1,5 @@
 {
+  "framework": "nextjs",
   "buildCommand": "pnpm --filter @veda/shared build && pnpm --filter @veda/web build",
   "installCommand": "pnpm install --no-frozen-lockfile"
 }
