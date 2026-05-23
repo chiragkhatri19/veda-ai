@@ -8,6 +8,7 @@
     "typecheck": "pnpm --filter @veda/shared exec tsc --noEmit && pnpm --filter @veda/api exec tsc --noEmit && pnpm --filter @veda/web exec tsc --noEmit"
   },
   "private": true,
+  "packageManager": "pnpm@9.15.9",
   "devDependencies": {
     "concurrently": "^9.1.2",
     "prettier": "^3.8.3",

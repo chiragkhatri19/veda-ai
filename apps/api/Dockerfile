@@ -1,7 +1,7 @@
 FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm
+RUN corepack enable && corepack prepare pnpm@9.15.9 --activate
 
 # ── Install all workspace deps ────────────────────────────────────────────────
 FROM base AS deps
