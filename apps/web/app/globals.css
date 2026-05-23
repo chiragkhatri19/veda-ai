@@ -91,7 +91,7 @@ html.dark .shell-root {
 
 @layer base {
   html {
-    font-family: Inter, system-ui, sans-serif;
+    font-family: var(--font-sans), system-ui, sans-serif;
     font-feature-settings: "cv11", "ss01";
   }
 
