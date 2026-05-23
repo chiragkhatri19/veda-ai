@@ -1,9 +1,12 @@
 import { Router } from 'express';
+import type { RequestHandler } from 'express';
 import { Queue } from 'bullmq';
 import { redisClient } from '../config/redis.js';
 import { logger } from '../utils/logger.js';
+import { generationRateLimiter } from '../middleware/rateLimiter.js';
 
 const router = Router();
+const limiter = generationRateLimiter as unknown as RequestHandler;
 
 export const rubricQueue = new Queue('rubric-generation', {
   connection: redisClient,
@@ -15,7 +18,7 @@ export const rubricQueue = new Queue('rubric-generation', {
   },
 });
 
-router.post('/rubric', async (req, res, next) => {
+router.post('/rubric', limiter, async (req, res, next) => {
   try {
     const { topic, subject, grade, assessmentType, totalMarks, numCriteria } = req.body as {
       topic: string;

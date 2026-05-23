@@ -65,5 +65,7 @@ const assignmentSchema = new Schema<IAssignment>(
 );
 
 assignmentSchema.index({ createdAt: -1 });
+assignmentSchema.index({ jobStatus: 1, createdAt: -1 });
+assignmentSchema.index({ subject: 1, grade: 1, createdAt: -1 });
 
 export const Assignment = mongoose.model<IAssignment>('Assignment', assignmentSchema);

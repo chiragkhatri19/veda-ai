@@ -3,6 +3,7 @@ import { redisClient } from '../config/redis.js';
 
 export interface GenerationJobData {
   assignmentId: string;
+  traceId?: string;
 }
 
 export const generationQueue = new Queue<GenerationJobData>('assignment-generation', {

@@ -4,6 +4,7 @@ import { generateQuestionPaperPDF } from '../services/pdf.service.js';
 import { generationQueue } from '../queues/queue.js';
 import { CreateAssignmentSchema } from '../middleware/validate.middleware.js';
 import { logger } from '../utils/logger.js';
+import type { TracedRequest } from '../middleware/trace.middleware.js';
 
 export const assignmentController = {
   async list(_req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -28,13 +29,13 @@ export const assignmentController = {
     }
   },
 
-  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async create(req: TracedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const data = CreateAssignmentSchema.parse(req.body);
       const assignment = await assignmentService.create(data);
 
-      await generationQueue.add('generate', { assignmentId: assignment.id });
-      logger.info('Generation job queued', { assignmentId: assignment.id });
+      await generationQueue.add('generate', { assignmentId: assignment.id, traceId: req.traceId });
+      logger.info('Generation job queued', { assignmentId: assignment.id, traceId: req.traceId });
 
       res.status(202).json({
         message: 'Assignment generation has been enqueued.',
@@ -86,7 +87,7 @@ export const assignmentController = {
     }
   },
 
-  async regenerate(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async regenerate(req: TracedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const assignment = await assignmentService.resetForRegeneration(req.params.id);
       if (!assignment) {
@@ -94,8 +95,8 @@ export const assignmentController = {
         return;
       }
 
-      await generationQueue.add('generate', { assignmentId: req.params.id });
-      logger.info('Regeneration job queued', { assignmentId: req.params.id });
+      await generationQueue.add('generate', { assignmentId: req.params.id, traceId: req.traceId });
+      logger.info('Regeneration job queued', { assignmentId: req.params.id, traceId: req.traceId });
 
       res.status(202).json({
         message: 'Assignment regeneration has been enqueued.',

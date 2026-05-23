@@ -9,7 +9,7 @@ export interface CreateAssignmentResponse {
 }
 
 const http = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000',
+  baseURL: '',
   headers: { 'Content-Type': 'application/json' },
 });
 
