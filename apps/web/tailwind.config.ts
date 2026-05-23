@@ -35,9 +35,9 @@ const config: Config = {
       },
       boxShadow: {
         /* Multi-layer, no border rings — pure shadow depth */
-        card:        '0 1px 3px rgba(0,0,0,0.05), 0 4px 14px rgba(0,0,0,0.07)',
-        'card-hover':'0 4px 8px rgba(0,0,0,0.06), 0 12px 28px rgba(0,0,0,0.12), 0 24px 48px -8px rgba(0,0,0,0.07)',
-        dropdown:    '0 4px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.14), 0 24px 48px -8px rgba(0,0,0,0.06)',
+        card:        '0px 4px 18px rgba(16,24,40,0.03), 0px 1px 3px rgba(16,24,40,0.06)',
+        'card-hover':'0px 8px 32px rgba(16,24,40,0.07), 0px 2px 8px rgba(16,24,40,0.10)',
+        dropdown:    '0 4px 6px rgba(16,24,40,0.04), 0 10px 28px rgba(16,24,40,0.10), 0 24px 48px -8px rgba(16,24,40,0.06)',
         sidebar:     '0 2px 6px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.14), 0 32px 80px -8px rgba(0,0,0,0.20)',
         topbar:      '0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.08), 0 16px 40px -8px rgba(0,0,0,0.06)',
       },

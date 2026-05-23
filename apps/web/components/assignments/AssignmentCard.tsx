@@ -37,7 +37,7 @@ export default function AssignmentCard({ assignment, onDelete }: Props) {
   }, []);
 
   return (
-    <div className="group bg-app-surface/[0.97] rounded-2xl p-5 shadow-card hover:shadow-card-hover dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.32),0_16px_40px_rgba(0,0,0,0.44)] transition-shadow duration-200 flex flex-col gap-3 animate-fade-in">
+    <div className="group bg-white dark:bg-app-surface rounded-2xl p-5 shadow-card hover:shadow-card-hover dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.32),0_16px_40px_rgba(0,0,0,0.44)] transition-shadow duration-200 flex flex-col gap-3 animate-fade-in">
       {/* Top row: title + menu */}
       <div className="flex items-start justify-between gap-2">
         <Link href={`/assignments/${assignment.id}`} className="flex-1 min-w-0">

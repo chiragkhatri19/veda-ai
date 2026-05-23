@@ -27,7 +27,7 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
       />
 
       {/* Paper card */}
-      <div className="bg-app-surface/[0.97] rounded-2xl shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] print:shadow-none print:rounded-none print:bg-white">
+      <div className="bg-white dark:bg-app-surface rounded-[24px] shadow-[0px_4px_18px_rgba(16,24,40,0.04),0px_1px_4px_rgba(16,24,40,0.08)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] print:shadow-none print:rounded-none print:bg-white">
         <div className="p-8 sm:p-12 print:p-0 max-w-3xl mx-auto print:max-w-none print:mx-0">
 
           {/* School / exam header */}

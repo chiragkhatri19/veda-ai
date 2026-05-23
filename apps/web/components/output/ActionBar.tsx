@@ -52,21 +52,26 @@ export default function ActionBar({ assignmentId, assignmentTitle, generatedAt, 
   });
 
   return (
-    <div className="flex items-center justify-between no-print mb-5 flex-wrap gap-3">
-      <p className="text-[11px] text-app-text-muted hidden sm:block">Generated {timeStr}</p>
+    <div className="no-print mb-6 bg-[#111827] rounded-2xl px-5 py-4 flex items-center justify-between flex-wrap gap-3">
+      {/* Left: title + timestamp */}
+      <div className="min-w-0">
+        <p className="text-white font-bold text-[15px] tracking-tight truncate">{assignmentTitle}</p>
+        <p className="text-zinc-400 text-[12px] mt-0.5">Generated {timeStr}</p>
+      </div>
 
-      <div className="flex items-center gap-2 flex-wrap">
+      {/* Right: action buttons */}
+      <div className="flex items-center gap-2 flex-wrap shrink-0">
         <button
           onClick={handleRegenerate}
           disabled={regenerating}
-          className="inline-flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium text-app-text-secondary border border-app-border rounded-full hover:bg-app-surface-2 active:scale-[0.97] transition-[background-color,transform] duration-100 disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium text-white/80 border border-white/20 rounded-full hover:bg-white/10 active:scale-[0.97] transition-[background-color,transform] duration-100 disabled:opacity-50"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${regenerating ? 'animate-spin' : ''}`} />
           Regenerate
         </button>
         <button
           onClick={() => window.print()}
-          className="inline-flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium text-app-text-secondary border border-app-border rounded-full hover:bg-app-surface-2 active:scale-[0.97] transition-[background-color,transform] duration-100"
+          className="inline-flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium text-white/80 border border-white/20 rounded-full hover:bg-white/10 active:scale-[0.97] transition-[background-color,transform] duration-100"
         >
           <Printer className="w-3.5 h-3.5" />
           Print
@@ -74,7 +79,7 @@ export default function ActionBar({ assignmentId, assignmentTitle, generatedAt, 
         <button
           onClick={handleDownloadPdf}
           disabled={downloading}
-          className="inline-flex items-center gap-1.5 px-4 py-2 text-[12px] font-semibold text-white bg-brand-dark rounded-full hover:opacity-90 active:scale-[0.97] active:opacity-80 transition-[opacity,transform] duration-100 disabled:opacity-60"
+          className="inline-flex items-center gap-1.5 px-4 py-2 text-[12px] font-semibold text-[#111827] bg-white rounded-full hover:bg-zinc-100 active:scale-[0.97] transition-[background-color,transform] duration-100 disabled:opacity-60"
         >
           <Download className="w-3.5 h-3.5" />
           {downloading ? 'Saving…' : 'Download PDF'}

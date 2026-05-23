@@ -55,7 +55,7 @@ export default function EmptyState({ hasSearch }: Props) {
     <div className="flex flex-col items-center justify-center py-16 text-center">
       <EmptyIllustration />
       <div className="animate-slide-up">
-        <h3 className="text-[18px] font-semibold text-app-text-primary mb-3">
+        <h3 className="text-[20px] font-bold tracking-tight text-app-text-primary mb-3">
           {hasSearch ? 'No results found' : 'No assignments yet'}
         </h3>
         <p className="text-[13px] text-app-text-secondary mb-8 max-w-[320px] leading-relaxed">

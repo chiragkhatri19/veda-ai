@@ -79,7 +79,7 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
           <button
             onClick={onExpand}
             title="Expand sidebar"
-            className="w-7 h-7 flex items-center justify-center rounded-lg text-app-text-muted hover:bg-white/20 dark:hover:bg-white/10 hover:text-app-text-primary transition-colors"
+            className="w-7 h-7 flex items-center justify-center rounded-lg text-app-text-muted hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-app-text-primary transition-colors"
           >
             <ChevronsRight className="w-3.5 h-3.5" />
           </button>
@@ -110,7 +110,7 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
               className={`relative flex items-center justify-center w-9 h-9 rounded-xl mx-auto transition-colors ${
                 active
                   ? 'bg-orange-50/90 dark:bg-orange-950/40 text-brand-orange'
-                  : 'text-app-text-muted hover:bg-white/30 dark:hover:bg-white/10 hover:text-app-text-primary'
+                  : 'text-app-text-muted hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-app-text-primary'
               }`}
             >
               <Icon className="w-[16px] h-[16px]" />
@@ -132,7 +132,7 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
           className={`flex items-center justify-center w-9 h-9 rounded-xl transition-colors ${
             pathname === '/settings'
               ? 'bg-orange-50/90 dark:bg-orange-950/40 text-brand-orange'
-              : 'text-app-text-muted hover:bg-white/30 dark:hover:bg-white/10 hover:text-app-text-primary'
+              : 'text-app-text-muted hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-app-text-primary'
           }`}
         >
           <Settings className="w-[16px] h-[16px]" />
@@ -173,7 +173,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
             <button
               onClick={onCollapse}
               title="Collapse sidebar"
-              className="hidden md:flex w-7 h-7 items-center justify-center rounded-lg text-app-text-muted hover:bg-white/20 dark:hover:bg-white/10 hover:text-app-text-primary transition-colors"
+              className="hidden md:flex w-7 h-7 items-center justify-center rounded-lg text-app-text-muted hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-app-text-primary transition-colors"
             >
               <ChevronsLeft className="w-3.5 h-3.5" />
             </button>
@@ -181,7 +181,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
           {onClose && (
             <button
               onClick={onClose}
-              className="md:hidden p-1.5 rounded-lg text-app-text-muted hover:text-app-text-primary hover:bg-white/20 dark:hover:bg-white/10 transition-colors"
+              className="md:hidden p-1.5 rounded-lg text-app-text-muted hover:text-app-text-primary hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -219,7 +219,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
               className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-[12.5px] font-medium active:scale-[0.98] transition-[background-color,color,transform] duration-100 ${
                 active
                   ? 'bg-orange-50/90 dark:bg-orange-950/40 text-brand-orange'
-                  : 'text-app-text-secondary hover:bg-white/30 dark:hover:bg-white/10 hover:text-app-text-primary'
+                  : 'text-app-text-secondary hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-app-text-primary'
               }`}
             >
               <Icon className={`w-[15px] h-[15px] shrink-0 ${active ? 'text-brand-orange' : ''}`} />
@@ -247,7 +247,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
           className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-[12.5px] font-medium active:scale-[0.98] transition-[background-color,color,transform] duration-100 ${
             pathname === '/settings'
               ? 'bg-orange-50/90 dark:bg-orange-950/40 text-brand-orange'
-              : 'text-app-text-secondary hover:bg-white/30 dark:hover:bg-white/10 hover:text-app-text-primary'
+              : 'text-app-text-secondary hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-app-text-primary'
           }`}
         >
           <Settings className={`w-[15px] h-[15px] shrink-0 ${pathname === '/settings' ? 'text-brand-orange' : ''}`} />
@@ -265,7 +265,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
           href="/settings"
           onClick={onClose}
           title={showLabels ? undefined : `${school} · ${city}`}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/30 dark:hover:bg-white/10 active:scale-[0.98] transition-[background-color,transform] duration-100 mt-1"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-[0.98] transition-[background-color,transform] duration-100 mt-1"
         >
           <div className="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center text-white text-[11px] font-bold shrink-0 shadow-sm">
             {avatarInitials}
@@ -343,13 +343,12 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
 
   return (
     <>
-      {/* ── Desktop: floating glass card ────────────────────────────────── */}
+      {/* ── Desktop: flat white sidebar ─────────────────────────────────── */}
       <div
-        className="hidden md:block shrink-0 relative transition-[width] duration-150 ease-out pl-3 py-3"
+        className="hidden md:block shrink-0 relative bg-white dark:bg-app-surface border-r border-zinc-200 dark:border-zinc-800 transition-[width] duration-150 ease-out"
         style={{ width: displayWidth }}
       >
-        {/* Glass card — bg-app-surface at 85% lets canvas gradient show through */}
-        <div className="h-full w-full rounded-2xl overflow-hidden bg-app-surface/85 backdrop-blur-xl shadow-sidebar dark:bg-app-surface/80 dark:shadow-[0_0_0_1px_rgba(255,255,255,0.07),0_4px_24px_rgba(0,0,0,0.65),0_32px_80px_rgba(0,0,0,0.65)]">
+        <div className="h-full w-full overflow-hidden">
           {collapsed ? (
             <CollapsedSidebar onExpand={toggleCollapse} />
           ) : (
@@ -357,9 +356,9 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
           )}
         </div>
 
-        {/* Drag handle aligned to card edges via top-3 bottom-3 */}
+        {/* Drag handle */}
         <div
-          className="absolute top-3 right-0 bottom-3 w-4 z-20 cursor-col-resize group flex items-center justify-end"
+          className="absolute top-0 right-0 bottom-0 w-4 z-20 cursor-col-resize group flex items-center justify-end"
           onMouseDown={handleDragStart}
           onDoubleClick={toggleCollapse}
           title="Drag to resize · Double-click to collapse"
@@ -370,7 +369,7 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
 
       {/* ── Mobile drawer — solid bg, no glass ──────────────────────────── */}
       <div
-        className={`md:hidden fixed inset-y-0 left-0 z-40 bg-app-surface transition-transform duration-200 ease-in-out shadow-[4px_0_32px_rgba(0,0,0,0.14)] dark:shadow-[4px_0_32px_rgba(0,0,0,0.6)] ${
+        className={`md:hidden fixed inset-y-0 left-0 z-40 bg-white dark:bg-app-surface border-r border-zinc-200 dark:border-zinc-800 transition-transform duration-200 ease-in-out shadow-[4px_0_24px_rgba(16,24,40,0.10)] dark:shadow-[4px_0_32px_rgba(0,0,0,0.6)] ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
         style={{ width: SIDEBAR_DEFAULT }}
