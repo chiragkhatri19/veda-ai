@@ -119,7 +119,7 @@ export default function AssignmentsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search Assignment"
-              className="w-full pl-10 pr-10 py-2.5 text-[13px] text-app-text-primary bg-app-surface border border-app-border rounded-xl focus:outline-none focus:border-app-text-muted transition-colors placeholder:text-app-text-muted"
+              className="w-full pl-10 pr-10 py-2.5 text-[13px] text-app-text-primary bg-app-surface border border-app-border rounded-full focus:outline-none focus:border-app-text-muted transition-colors placeholder:text-app-text-muted"
             />
             {searchQuery && (
               <button

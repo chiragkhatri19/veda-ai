@@ -90,7 +90,7 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
       <Link
         href="/assignments/create"
         title="New Assignment"
-        className="w-9 h-9 flex items-center justify-center rounded-xl bg-brand-dark text-white hover:opacity-90 active:scale-90 active:opacity-75 transition-[opacity,transform] duration-150 mb-5 shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.20)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
+        className="w-9 h-9 flex items-center justify-center rounded-xl bg-brand-dark text-white border border-brand-orange/30 hover:opacity-90 active:scale-90 active:opacity-75 transition-[opacity,transform] duration-150 mb-5 shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.20)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
       >
         <Plus className="w-4 h-4" strokeWidth={2.5} />
       </Link>
@@ -194,7 +194,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
         <Link
           href="/assignments/create"
           onClick={onClose}
-          className="flex items-center justify-center gap-2 w-full bg-brand-dark text-white text-[13px] font-semibold py-3 rounded-2xl hover:opacity-90 active:scale-[0.97] active:opacity-80 transition-[opacity,transform] duration-150 shadow-[0_2px_8px_rgba(0,0,0,0.20)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
+          className="flex items-center justify-center gap-2 w-full bg-brand-dark text-white text-[13px] font-semibold py-3 rounded-2xl border border-brand-orange/30 hover:opacity-90 active:scale-[0.97] active:opacity-80 transition-[opacity,transform] duration-150 shadow-[0_2px_8px_rgba(0,0,0,0.20)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
         >
           <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
           {showLabels && 'Create Assignment'}

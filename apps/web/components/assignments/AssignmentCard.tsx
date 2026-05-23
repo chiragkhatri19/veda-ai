@@ -56,7 +56,7 @@ export default function AssignmentCard({ assignment, onDelete }: Props) {
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-8 z-20 w-44 bg-app-surface/95 backdrop-blur-xl rounded-2xl shadow-dropdown dark:shadow-[0_4px_12px_rgba(0,0,0,0.3),0_16px_40px_rgba(0,0,0,0.5)] py-1 overflow-hidden animate-fade-in">
+            <div className="absolute right-0 top-8 z-50 w-44 bg-app-surface/95 backdrop-blur-xl rounded-2xl shadow-dropdown dark:shadow-[0_4px_12px_rgba(0,0,0,0.3),0_16px_40px_rgba(0,0,0,0.5)] py-1 overflow-hidden animate-fade-in">
               <Link
                 href={`/assignments/${assignment.id}`}
                 onClick={() => setMenuOpen(false)}

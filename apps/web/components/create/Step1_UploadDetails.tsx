@@ -53,12 +53,12 @@ const labelCls = 'block text-[11px] font-semibold text-app-text-secondary mb-1.5
 
 function Stepper({ value, onChange }: { value: number; onChange: (v: number) => void }) {
   return (
-    <div className="flex items-center border border-app-border rounded-lg overflow-hidden w-24 bg-app-surface">
+    <div className="flex items-center gap-1 w-24">
       <button
         type="button"
         disabled={value <= 1}
         onClick={() => onChange(Math.max(1, value - 1))}
-        className="w-8 h-9 flex items-center justify-center text-app-text-muted hover:bg-app-surface-2 active:bg-app-border disabled:opacity-30 transition-[background-color] duration-100"
+        className="w-8 h-8 flex items-center justify-center rounded-full border border-app-border text-app-text-muted hover:bg-app-surface-2 active:bg-app-border disabled:opacity-30 transition-[background-color] duration-100 bg-app-surface"
       >
         <Minus className="w-3 h-3" />
       </button>
@@ -68,7 +68,7 @@ function Stepper({ value, onChange }: { value: number; onChange: (v: number) => 
       <button
         type="button"
         onClick={() => onChange(value + 1)}
-        className="w-8 h-9 flex items-center justify-center text-app-text-muted hover:bg-app-surface-2 active:bg-app-border transition-[background-color] duration-100"
+        className="w-8 h-8 flex items-center justify-center rounded-full border border-app-border text-app-text-muted hover:bg-app-surface-2 active:bg-app-border transition-[background-color] duration-100 bg-app-surface"
       >
         <Plus className="w-3 h-3" />
       </button>
