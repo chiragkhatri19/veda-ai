@@ -2,8 +2,8 @@
 
 AI-powered question paper generator for Indian school teachers. Describe what you need — subject, grade, question types, difficulty split — and get back a properly structured, print-ready exam paper in under two minutes.
 
-**Live →** `[add Vercel URL after deployment]`  
-**API →** `[add Railway URL after deployment]/api/health`
+**Live →** https://veda-ai-tawny.vercel.app  
+**API →** https://api-production-eeb3.up.railway.app/api/health
 
 ---
 
