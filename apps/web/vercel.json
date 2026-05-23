@@ -1,0 +1,6 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "cd ../.. && pnpm install && pnpm --filter @veda/shared build && pnpm --filter @veda/web build",
+  "outputDirectory": ".next",
+  "installCommand": "echo 'install handled by buildCommand'"
+}
