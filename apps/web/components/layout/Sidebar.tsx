@@ -349,7 +349,7 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
         style={{ width: displayWidth }}
       >
         {/* Glass card — bg-app-surface at 85% lets canvas gradient show through */}
-        <div className="h-full w-full rounded-2xl overflow-hidden bg-app-surface/85 backdrop-blur-xl shadow-sidebar dark:bg-app-surface/80 dark:shadow-[0_0_0_1px_rgba(255,255,255,0.07),0_4px_20px_rgba(0,0,0,0.5),0_24px_60px_rgba(0,0,0,0.5)]">
+        <div className="h-full w-full rounded-2xl overflow-hidden bg-app-surface/85 backdrop-blur-xl shadow-sidebar dark:bg-app-surface/80 dark:shadow-[0_0_0_1px_rgba(255,255,255,0.07),0_4px_24px_rgba(0,0,0,0.65),0_32px_80px_rgba(0,0,0,0.65)]">
           {collapsed ? (
             <CollapsedSidebar onExpand={toggleCollapse} />
           ) : (

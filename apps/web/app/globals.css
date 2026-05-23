@@ -40,13 +40,11 @@ html.dark {
  */
 .shell-root {
   background:
-    radial-gradient(ellipse 70% 55% at 5% 0%, rgba(249,115,22,0.04) 0%, transparent 100%),
     radial-gradient(ellipse 50% 40% at 95% 100%, rgba(99,102,241,0.03) 0%, transparent 100%),
     rgb(var(--c-bg));
 }
 html.dark .shell-root {
   background:
-    radial-gradient(ellipse 70% 55% at 5% 0%, rgba(249,115,22,0.07) 0%, transparent 100%),
     radial-gradient(ellipse 50% 40% at 95% 100%, rgba(139,92,246,0.05) 0%, transparent 100%),
     rgb(var(--c-bg));
 }
