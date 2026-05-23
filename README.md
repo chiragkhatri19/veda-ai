@@ -3,7 +3,7 @@
 AI-powered question paper generator for Indian school teachers. Describe what you need — subject, grade, question types, difficulty split — and get back a properly structured, print-ready exam paper in under two minutes.
 
 **Live →** `[add Vercel URL after deployment]`  
-**API →** `[add Railway URL after deployment]/api/healthz`
+**API →** `[add Railway URL after deployment]/api/health`
 
 ---
 
@@ -65,7 +65,7 @@ Gemini takes 15–30 seconds on a full paper. Doing this inline blocks the event
 | **Class Groups** | Teachers organise students into groups; `groupId` is threaded through shared types, Mongoose schema, service layer, and creation form |
 | **My Library** | Browse and re-download every completed paper without regenerating; filtered by subject, searchable |
 | **Seed script** | `pnpm --filter @veda/api seed` — three realistic demo assignments so reviewers see a populated dashboard, not an empty state |
-| **17 unit tests** | Vitest tests on `promptBuilder` and `responseParser` — the two functions where a silent bug degrades output quality without any visible error |
+| **19 unit tests** | Vitest tests on `promptBuilder` and `responseParser` — the two functions where a silent bug degrades output quality without any visible error |
 | **Navigation progress bar** | Custom `NavigationProgress` component that listens for link clicks in the capture phase and shows an orange bar immediately — before the JS bundle for the next route even loads |
 | **Pixel-accurate skeleton loaders** | Every route has a `loading.tsx` whose DOM structure mirrors the real page exactly, so the skeleton-to-content transition involves no layout shift |
 
@@ -106,7 +106,7 @@ pnpm dev
 |---------|-----|
 | Frontend | http://localhost:3000 |
 | API | http://localhost:4000 |
-| Health | http://localhost:4000/api/healthz |
+| Health | http://localhost:4000/api/health |
 
 ---
 
@@ -141,7 +141,7 @@ pnpm dev
    cd ../.. && pnpm install && pnpm --filter @veda/shared build && pnpm --filter @veda/web build
    ```
 4. Add environment variables:
-   - `NEXT_PUBLIC_API_URL` → your Railway backend URL
+   - `API_URL` → your Railway backend URL (server-side rewrite target — never exposed to the browser)
    - `NEXT_PUBLIC_SOCKET_URL` → your Railway backend URL
 
 ---
@@ -163,8 +163,8 @@ pnpm dev
 
 | Variable | Required | Notes |
 |----------|----------|-------|
-| `NEXT_PUBLIC_API_URL` | ✅ | Backend base URL — Railway URL in production |
-| `NEXT_PUBLIC_SOCKET_URL` | ✅ | Same as API URL; Socket.IO runs on the same server |
+| `API_URL` | ✅ | Backend base URL — used by Next.js rewrites on the server; Railway URL in production |
+| `NEXT_PUBLIC_SOCKET_URL` | ✅ | Same as API URL; Socket.IO connects directly from the browser |
 
 ---
 
@@ -179,7 +179,7 @@ pnpm dev
 | `POST` | `/api/assignments/:id/regenerate` | Re-queue generation (resets `jobStatus` to `queued`) |
 | `GET` | `/api/assignments/:id/pdf` | Stream generated PDF |
 | `POST` | `/api/toolkit/rubric` | Generate a marking rubric with four performance levels |
-| `GET` | `/api/healthz` | Health check — returns `{ status: "ok" }` |
+| `GET` | `/api/health` | Health check — returns `{ status: "ok" }` |
 
 ---
 
@@ -237,11 +237,11 @@ veda-ai/
 pnpm --filter @veda/api test
 ```
 
-17 tests across two files:
+19 tests across two files:
 
 **`promptBuilder.test.ts`** — 9 tests covering total marks calculation, total question count, section label generation, reference material inclusion/exclusion/truncation, additional instructions, subject and grade embedding, and the JSON-start instruction.
 
-**`responseParser.test.ts`** — 8 tests covering valid JSON parsing, code-fence stripping (with and without language tag), malformed JSON, missing required fields, invalid difficulty values, null hint coercion, and all three valid difficulty strings.
+**`responseParser.test.ts`** — 10 tests covering valid JSON parsing, code-fence stripping (with and without language tag), malformed JSON, missing required fields, invalid difficulty values, null hint coercion, all three valid difficulty strings, and Gemini capitalisation normalisation (`"Medium"` → `"moderate"`, `"Hard"` → `"hard"`).
 
 ---
 

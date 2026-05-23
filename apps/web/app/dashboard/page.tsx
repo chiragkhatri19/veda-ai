@@ -31,7 +31,7 @@ function StatCard({
   accent: string;
 }) {
   return (
-    <div className="bg-app-surface/[0.97] rounded-2xl p-4 flex flex-col gap-3 shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] animate-fade-in">
+    <div className="bg-white dark:bg-app-surface rounded-2xl p-4 flex flex-col gap-3 shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] animate-fade-in">
       <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${accent}`}>
         <Icon className="w-4 h-4" />
       </div>
@@ -131,7 +131,7 @@ export default function DashboardPage() {
               <Link
                 key={action.href}
                 href={action.href}
-                className="bg-app-surface/[0.97] rounded-2xl p-4 flex items-center justify-between group shadow-card hover:shadow-card-hover dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.32),0_16px_40px_rgba(0,0,0,0.44)] active:scale-[0.98] transition-shadow duration-150"
+                className="bg-white dark:bg-app-surface rounded-2xl p-4 flex items-center justify-between group shadow-card hover:shadow-card-hover dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.32),0_16px_40px_rgba(0,0,0,0.44)] active:scale-[0.98] transition-shadow duration-150"
               >
                 <div>
                   <p className="text-[13px] font-semibold text-app-text-primary group-hover:text-brand-orange transition-colors">{action.label}</p>
@@ -156,7 +156,7 @@ export default function DashboardPage() {
         </div>
 
         {recent.length === 0 ? (
-          <div className="bg-app-surface/[0.97] rounded-2xl px-5 py-10 text-center shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
+          <div className="bg-white dark:bg-app-surface rounded-2xl px-5 py-10 text-center shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
             <BookOpen className="w-8 h-8 text-app-text-muted mx-auto mb-3" />
             <p className="text-[13px] text-app-text-muted mb-3">No assignments yet</p>
             <Link href="/assignments/create" className="text-[13px] font-semibold text-brand-orange hover:underline">
@@ -164,7 +164,7 @@ export default function DashboardPage() {
             </Link>
           </div>
         ) : (
-          <div className="bg-app-surface/[0.97] rounded-2xl overflow-hidden divide-y divide-app-border/40 shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
+          <div className="bg-white dark:bg-app-surface rounded-2xl overflow-hidden divide-y divide-app-border/40 shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
             {recent.map((a) => <RecentRow key={a.id} assignment={a} />)}
           </div>
         )}
