@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -28,22 +29,7 @@ const NAV_ITEMS = [
 
 function VedaAILogo() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-      <defs>
-        <linearGradient id="vl-g" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#FB923C" />
-          <stop offset="100%" stopColor="#DC2626" />
-        </linearGradient>
-      </defs>
-      <rect width="32" height="32" rx="9" fill="url(#vl-g)" />
-      <path
-        d="M8 10h16M12 10l4 13 4-13"
-        stroke="white"
-        strokeWidth="2.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <Image src="/logo.png" alt="VedaAI" width={32} height={32} className="rounded-[9px]" priority />
   );
 }
 

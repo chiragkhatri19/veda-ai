@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { CheckCircle2, XCircle, FileText } from 'lucide-react';
 
@@ -27,12 +28,7 @@ interface Props {
 }
 
 function VedaAIMark() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 30 30" fill="none" aria-hidden="true">
-      <rect width="30" height="30" rx="8" fill="#F97316" />
-      <path d="M7 8h16M11 8l4 13 4-13" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+  return <Image src="/logo.png" alt="VedaAI" width={32} height={32} className="rounded-[9px]" />;
 }
 
 function SkLine({ w, delay, opacity = 1 }: { w: string; delay: number; opacity?: number }) {

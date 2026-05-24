@@ -58,7 +58,8 @@ CALIBER_CURRENT_STATUS_DELTA.md
 CALIBER_FINAL_VERIFICATION_REPORT.md
 ved_ai_production_readiness.md
 
-# Screenshots
+# Screenshots (but allow app assets in public/)
 *.png
+!apps/web/public/*.png
 
 .vercel
