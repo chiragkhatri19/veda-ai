@@ -176,7 +176,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
         </div>
       </div>
 
-      <div className="px-3 mb-1 shrink-0">
+      <div className="px-3 mt-3 mb-1 shrink-0">
         <Link
           href="/assignments/create"
           onClick={onClose}
