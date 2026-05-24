@@ -2,14 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, BookOpen, Monitor, Library } from 'lucide-react';
+import { LayoutGrid, FileText, Library, Sparkles } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { href: '/dashboard',   label: 'Home',       icon: LayoutDashboard },
-  { href: '/groups',      label: 'My Groups',  icon: Users           },
-  { href: '/assignments', label: 'Assignments', icon: BookOpen        },
-  { href: '/toolkit',     label: 'Toolkit',    icon: Monitor         },
-  { href: '/library',     label: 'Library',    icon: Library         },
+  { href: '/dashboard',   label: 'Home',       icon: LayoutGrid },
+  { href: '/assignments', label: 'Assignments', icon: FileText   },
+  { href: '/library',     label: 'Library',     icon: Library    },
+  { href: '/toolkit',     label: 'AI Toolkit',  icon: Sparkles   },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -22,34 +21,52 @@ export default function MobileDock() {
   const pathname = usePathname();
 
   return (
-    <div className="md:hidden fixed bottom-5 left-4 right-4 z-50 no-print">
-      <nav className="
-        bg-[#0a0a0a] dark:bg-white
-        rounded-[22px]
-        flex items-stretch
-        overflow-hidden
-        shadow-[0_2px_4px_rgba(0,0,0,0.30),0_8px_20px_rgba(0,0,0,0.36),0_20px_50px_rgba(0,0,0,0.32),0_40px_90px_rgba(0,0,0,0.26)]
-        dark:shadow-[0_0_0_1px_rgba(0,0,0,0.07),0_4px_12px_rgba(0,0,0,0.12),0_16px_48px_rgba(0,0,0,0.16),0_36px_88px_rgba(0,0,0,0.12)]
-      ">
+    <div className="md:hidden fixed bottom-4 left-3 right-3 z-50 no-print">
+      <nav
+        className="
+          bg-[#0a0a0a] dark:bg-white
+          rounded-[26px]
+          flex items-center
+          px-2 py-2
+          shadow-[0_2px_6px_rgba(0,0,0,0.35),0_8px_24px_rgba(0,0,0,0.40),0_22px_56px_rgba(0,0,0,0.36),0_44px_100px_rgba(0,0,0,0.30)]
+          dark:shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_4px_14px_rgba(0,0,0,0.12),0_18px_52px_rgba(0,0,0,0.16),0_40px_96px_rgba(0,0,0,0.12)]
+        "
+      >
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
           return (
             <Link
               key={href}
               href={href}
-              className={`
-                flex flex-col items-center justify-center gap-[5px] flex-1 py-4
-                transition-all duration-150 active:scale-95 active:opacity-60
-                ${active
-                  ? 'text-brand-orange bg-white/[0.10] dark:bg-orange-500/[0.10]'
-                  : 'text-zinc-500 dark:text-zinc-500 hover:text-zinc-300 dark:hover:text-zinc-700'
-                }
-              `}
+              className="flex-1 flex flex-col items-center active:opacity-60 transition-opacity duration-100"
             >
-              <Icon className="w-[21px] h-[21px]" strokeWidth={active ? 2.5 : 1.8} />
-              <span className={`text-[9.5px] leading-none tracking-wide uppercase ${active ? 'font-bold' : 'font-medium'}`}>
-                {label}
-              </span>
+              {/* Active: white pill chip. Inactive: transparent */}
+              <div
+                className={`
+                  w-full flex flex-col items-center gap-[5px] py-2.5 rounded-[18px]
+                  transition-all duration-200
+                  ${active
+                    ? 'bg-white dark:bg-zinc-200 shadow-[0_1px_4px_rgba(0,0,0,0.10)]'
+                    : 'bg-transparent'
+                  }
+                `}
+              >
+                <Icon
+                  className={`w-[20px] h-[20px] ${
+                    active ? 'text-zinc-900 dark:text-zinc-900' : 'text-zinc-500 dark:text-zinc-400'
+                  }`}
+                  strokeWidth={active ? 2.5 : 1.8}
+                />
+                <span
+                  className={`text-[10px] leading-none ${
+                    active
+                      ? 'text-zinc-900 dark:text-zinc-900 font-semibold'
+                      : 'text-zinc-500 dark:text-zinc-400 font-medium'
+                  }`}
+                >
+                  {label}
+                </span>
+              </div>
             </Link>
           );
         })}
