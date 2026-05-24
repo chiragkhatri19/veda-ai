@@ -78,6 +78,7 @@ RULES:
 6. Time allowed should be appropriate for ${totalMarks} marks (roughly 1 minute per mark, rounded to nearest 15 min).
 7. Question IDs must be unique strings like "q1", "q2", etc.
 8. Section IDs must be unique like "sec-a", "sec-b", etc.
+9. DIAGRAMS: For every question of type "diagram_graph", you MUST populate the "diagramDescription" field with a precise, detailed description of exactly what diagram, graph, chart, or figure should appear on the paper. Be specific — include axis labels, units, data ranges, key components to label, or structural parts to show. The question text must also reference the figure (e.g. "Study the diagram below and answer:" or "The graph below shows… Using it, answer:"). For all other question types, set "diagramDescription" to null.
 
 REQUIRED JSON SCHEMA (return an object matching this exactly):
 {
@@ -104,7 +105,8 @@ REQUIRED JSON SCHEMA (return an object matching this exactly):
           "difficulty": "easy",
           "marks": 2,
           "answer": "The complete model answer goes here.",
-          "hint": "Optional hint or null"
+          "hint": "Optional hint or null",
+          "diagramDescription": null
         }
       ]
     }

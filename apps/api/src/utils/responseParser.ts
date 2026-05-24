@@ -19,6 +19,7 @@ const QuestionSchema = z.object({
   marks: z.number(),
   answer: z.string().nullish().transform((v) => v ?? null),
   hint: z.string().nullish().transform((v) => v ?? null),
+  diagramDescription: z.string().nullish().transform((v) => v ?? null),
 });
 
 const SectionSchema = z.object({

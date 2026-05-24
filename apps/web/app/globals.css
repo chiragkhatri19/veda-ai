@@ -281,6 +281,11 @@ html.dark .shell-root {
     display: none !important;
   }
 
+  /* Diagram placeholder box — keep dashed border, enforce blank drawing space */
+  .question-paper-print .border-dashed {
+    border-style: dashed !important;
+  }
+
   /* ── 4. Rubric table ─────────────────────────────────────────────── */
   .rubric-print-area {
     overflow: visible !important;

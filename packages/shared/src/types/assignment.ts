@@ -15,6 +15,7 @@ export interface GeneratedQuestion {
   marks: number;
   answer: string | null;
   hint: string | null;
+  diagramDescription: string | null;
 }
 
 export interface GeneratedSection {

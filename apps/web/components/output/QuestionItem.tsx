@@ -7,6 +7,8 @@ interface Props {
 }
 
 export default function QuestionItem({ question, showAnswer }: Props) {
+  const hasDiagram = question.type === 'diagram_graph' || !!question.diagramDescription;
+
   return (
     <div className="flex gap-3.5 print:break-inside-avoid">
       <span className="font-serif text-[14px] font-bold text-app-text-primary min-w-[24px] pt-px shrink-0 tabular-nums">
@@ -24,6 +26,28 @@ export default function QuestionItem({ question, showAnswer }: Props) {
             </span>
           </div>
         </div>
+
+        {hasDiagram && (
+          <div className="mt-3 rounded-lg border border-dashed border-app-border dark:border-zinc-600 print:border-gray-400 overflow-hidden">
+            <div className="px-3 py-1.5 border-b border-dashed border-app-border dark:border-zinc-600 print:border-gray-400 bg-app-surface-2 dark:bg-zinc-800/40 print:bg-gray-50">
+              <span className="text-[10px] font-bold text-app-text-secondary uppercase tracking-wider">
+                Figure {question.questionNumber}
+              </span>
+            </div>
+            {question.diagramDescription ? (
+              <div className="px-3 pt-2 pb-1">
+                <p className="font-serif text-[11px] text-app-text-secondary italic leading-relaxed">
+                  {question.diagramDescription}
+                </p>
+              </div>
+            ) : null}
+            <div className="mx-3 my-3 h-40 rounded border border-dashed border-app-border dark:border-zinc-700 print:border-gray-300 flex items-center justify-center bg-app-bg/40 print:bg-white">
+              <span className="text-[11px] text-app-text-muted italic select-none print:text-gray-400">
+                [Diagram / Figure space]
+              </span>
+            </div>
+          </div>
+        )}
 
         {showAnswer && question.answer && (
           <div className="mt-3 rounded-lg overflow-hidden border border-blue-500/20 dark:border-blue-800/60">
