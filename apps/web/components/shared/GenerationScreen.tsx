@@ -28,10 +28,75 @@ interface Props {
 
 function VedaAIMark() {
   return (
-    <svg width="36" height="36" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+    <svg width="32" height="32" viewBox="0 0 30 30" fill="none" aria-hidden="true">
       <rect width="30" height="30" rx="8" fill="#F97316" />
       <path d="M7 8h16M11 8l4 13 4-13" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+}
+
+/* Skeleton line — reuses the skeletonPulse keyframe from globals.css */
+function SkLine({ w, delay, opacity = 1 }: { w: string; delay: number; opacity?: number }) {
+  return (
+    <div
+      className="h-[5px] rounded-full bg-app-border"
+      style={{
+        width: w,
+        opacity,
+        animation: `skeletonPulse 1.8s cubic-bezier(0.4,0,0.6,1) infinite`,
+        animationDelay: `${delay}ms`,
+      }}
+    />
+  );
+}
+
+/* The document preview that fills in as the paper generates */
+function DocumentPreview({ progress }: { progress: number }) {
+  return (
+    <div className="w-[178px] bg-app-surface dark:bg-[rgb(22,22,26)] border border-app-border rounded-xl shadow-card overflow-hidden">
+      {/* Paper header */}
+      <div className="px-4 py-3 border-b border-app-border/60 bg-app-surface-2/50 space-y-2">
+        <SkLine w="58%" delay={0} />
+        <SkLine w="40%" delay={100} opacity={0.7} />
+      </div>
+
+      {/* Section A */}
+      <div className="px-4 pt-3 pb-1 space-y-2">
+        <SkLine w="28%" delay={180} opacity={0.55} />
+        <div className="space-y-1.5 pl-2">
+          <SkLine w="96%" delay={260} />
+          <SkLine w="72%" delay={340} opacity={0.8} />
+        </div>
+        <div className="space-y-1.5 pl-2">
+          <SkLine w="90%" delay={420} />
+          <SkLine w="64%" delay={500} opacity={0.8} />
+        </div>
+      </div>
+
+      {/* Dashed section divider */}
+      <div className="mx-4 my-2 border-t border-dashed border-app-border/50" />
+
+      {/* Section B */}
+      <div className="px-4 pb-3 space-y-2">
+        <SkLine w="28%" delay={560} opacity={0.55} />
+        <div className="space-y-1.5 pl-2">
+          <SkLine w="88%" delay={640} />
+          <SkLine w="56%" delay={720} opacity={0.8} />
+        </div>
+        <div className="space-y-1.5 pl-2">
+          <SkLine w="93%" delay={800} />
+          <SkLine w="70%" delay={880} opacity={0.8} />
+        </div>
+      </div>
+
+      {/* Progress fill strip at the bottom of the document */}
+      <div className="h-[3px] bg-app-surface-2">
+        <div
+          className="h-full bg-brand-orange/60 transition-all duration-700 ease-out"
+          style={{ width: `${Math.max(progress, 3)}%` }}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -94,7 +159,7 @@ export default function GenerationScreen({
 
       {/* Context pill */}
       {(subject || title) && (
-        <div className="mb-10 animate-fade-in">
+        <div className="mb-9 animate-fade-in">
           <div className="inline-flex items-center gap-2 text-[12px] font-medium text-app-text-secondary bg-app-surface border border-app-border rounded-full px-4 py-2">
             <FileText className="w-3.5 h-3.5 text-brand-orange shrink-0" />
             {title && <span className="truncate max-w-[180px] sm:max-w-[260px]">{title}</span>}
@@ -105,46 +170,10 @@ export default function GenerationScreen({
         </div>
       )}
 
-      {/* Orbital animation */}
-      <div
-        className="relative flex items-center justify-center mb-12"
-        style={{ width: 220, height: 220 }}
-        aria-hidden="true"
-      >
-        {/* Expanding ping rings */}
-        <div className="absolute w-full h-full rounded-full border border-brand-orange/25 animate-ping-ring" style={{ animationDelay: '0s' }} />
-        <div className="absolute w-full h-full rounded-full border border-brand-orange/20 animate-ping-ring" style={{ animationDelay: '0.9s' }} />
-        <div className="absolute w-full h-full rounded-full border border-brand-orange/15 animate-ping-ring" style={{ animationDelay: '1.8s' }} />
-
-        {/* Static ambient ring */}
-        <div className="absolute w-[168px] h-[168px] rounded-full border border-brand-orange/20" />
-
-        {/* Orbiting glow dot */}
-        <div
-          className="absolute w-[158px] h-[158px] rounded-full"
-          style={{ animation: 'orbit 5s linear infinite' }}
-        >
-          <div
-            className="absolute top-0 left-1/2 w-3 h-3 rounded-full bg-brand-orange -translate-x-1/2 -translate-y-1/2"
-            style={{ boxShadow: '0 0 10px 4px rgb(249 115 22 / 0.45)' }}
-          />
-        </div>
-
-        {/* Counter-rotating secondary dot */}
-        <div
-          className="absolute w-[120px] h-[120px] rounded-full"
-          style={{ animation: 'orbit 9s linear infinite reverse' }}
-        >
-          <div className="absolute top-0 left-1/2 w-2 h-2 rounded-full bg-orange-300/50 -translate-x-1/2 -translate-y-1/2" />
-        </div>
-
-        {/* Floating center card */}
-        <div
-          className="relative z-10 w-[78px] h-[78px] rounded-2xl bg-app-surface border border-app-border flex items-center justify-center"
-          style={{ animation: 'float 3.5s ease-in-out infinite' }}
-        >
-          <VedaAIMark />
-        </div>
+      {/* Document visual */}
+      <div className="mb-10 flex flex-col items-center gap-4 animate-fade-in">
+        <VedaAIMark />
+        <DocumentPreview progress={displayProgress} />
       </div>
 
       {/* Heading + progress + facts */}
