@@ -91,7 +91,7 @@ export default function DashboardPage() {
       {/* Welcome */}
       <div className="flex items-start justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-[22px] font-bold text-app-text-primary">
+          <h1 suppressHydrationWarning className="text-[22px] font-bold text-app-text-primary">
             {greeting}, {firstName} 👋
           </h1>
           <p className="text-[13px] text-app-text-secondary mt-1">
