@@ -12,10 +12,10 @@ import { useAssignmentStore } from '@/store/assignmentStore';
 import { useUserStore } from '@/store/userStore';
 import { getSocket } from '@/lib/socket';
 
-export const SIDEBAR_COLLAPSED = 68;
-export const SIDEBAR_EXPANDED_MIN = 190;
-export const SIDEBAR_DEFAULT = 248;
-export const SIDEBAR_MAX = 340;
+export const SIDEBAR_COLLAPSED = 80;
+export const SIDEBAR_EXPANDED_MIN = 200;
+export const SIDEBAR_DEFAULT = 280;
+export const SIDEBAR_MAX = 380;
 const SNAP_THRESHOLD = 120;
 
 const NAV_ITEMS = [

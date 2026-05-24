@@ -79,7 +79,7 @@ export default function TopBar({ onMenuToggle }: Props) {
 
   return (
     <div className="sticky top-3 z-30 no-print mx-3 shrink-0">
-      <header className="h-16 flex items-center px-4 gap-3 bg-white dark:bg-app-surface rounded-2xl shadow-topbar dark:shadow-[0_2px_8px_rgba(0,0,0,0.22),0_8px_28px_rgba(0,0,0,0.34),0_16px_52px_rgba(0,0,0,0.26)]">
+      <header className="h-[72px] flex items-center px-5 gap-3 bg-white dark:bg-app-surface rounded-2xl shadow-topbar dark:shadow-[0_2px_8px_rgba(0,0,0,0.22),0_8px_28px_rgba(0,0,0,0.34),0_16px_52px_rgba(0,0,0,0.26)]">
 
         {/* ── Mobile: back button or logo ─────────────────────────────────── */}
         <div className="md:hidden flex items-center gap-2 flex-1 min-w-0">
