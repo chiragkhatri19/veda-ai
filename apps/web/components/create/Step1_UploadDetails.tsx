@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -108,6 +108,16 @@ export default function Step1_UploadDetails() {
 
   const { fields, append, remove } = useFieldArray({ control, name: 'questionTypes' });
   const questionTypes = watch('questionTypes');
+  const selectedGroupId = watch('groupId');
+
+  // When a group is selected, sync subject and grade from it
+  useEffect(() => {
+    if (!selectedGroupId) return;
+    const group = groups.find((g) => g.id === selectedGroupId);
+    if (!group) return;
+    setValue('subject', group.subject, { shouldDirty: true });
+    setValue('grade', group.grade, { shouldDirty: true });
+  }, [selectedGroupId, groups, setValue]);
 
   const totalQuestions = questionTypes.reduce((s, q) => s + (q.count || 0), 0);
   const totalMarks     = questionTypes.reduce((s, q) => s + (q.count || 0) * (q.marksPerQuestion || 0), 0);

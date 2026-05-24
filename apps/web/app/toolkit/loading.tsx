@@ -10,7 +10,7 @@ export default function ToolkitLoading() {
         <div className="skeleton h-3.5 w-72 rounded" />
       </div>
 
-      {/* Tool cards — 2-col on lg */}
+      {/* 2-col on lg */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {Array.from({ length: 2 }).map((_, i) => (
           <div key={i} className="bg-app-surface rounded-2xl p-6 flex flex-col gap-5 shadow-card">

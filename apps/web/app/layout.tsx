@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono, Lora } from 'next/font/google';
+import { Bricolage_Grotesque, JetBrains_Mono, Lora } from 'next/font/google';
 import { Toaster } from 'sonner';
 import ShellLayout from '@/components/layout/ShellLayout';
 import './globals.css';
 
-const sans = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-sans', weight: ['400', '500', '600', '700', '800'] });
+const sans = Bricolage_Grotesque({ subsets: ['latin'], display: 'swap', variable: '--font-sans', weight: ['400', '500', '600', '700', '800'] });
 const mono = JetBrains_Mono({ subsets: ['latin'], display: 'swap', variable: '--font-mono', weight: ['400', '500', '600', '700'] });
 const serif = Lora({ subsets: ['latin'], display: 'swap', variable: '--font-serif', weight: ['400', '500', '600', '700'] });
 
