@@ -28,7 +28,7 @@ const NAV_ITEMS = [
 
 function VedaAILogo({ size = 32 }: { size?: number }) {
   return (
-    <Image src="/logo.png" alt="VedaAI" width={size} height={size} className="rounded-[9px] block shrink-0" priority />
+    <Image src="/logo.png" alt="VedaAI" width={size} height={size} className="rounded-[9px] block shrink-0" />
   );
 }
 
@@ -146,9 +146,11 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
   return (
     <div className="h-full w-full bg-transparent flex flex-col overflow-hidden">
 
-      <div className="px-5 pt-5 pb-5 flex items-center justify-between shrink-0">
+      <div className="px-6 pt-5 pb-5 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3 min-w-0">
-          <VedaAILogo size={36} />
+          <div className="mt-1 shrink-0">
+            <VedaAILogo size={36} />
+          </div>
           {showLabels && (
             <span className="text-[17px] font-extrabold text-app-text-primary tracking-tight leading-none truncate">VedaAI</span>
           )}
