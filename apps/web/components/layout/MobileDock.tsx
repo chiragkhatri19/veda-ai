@@ -8,7 +8,7 @@ const NAV_ITEMS = [
   { href: '/dashboard',   label: 'Home',       icon: LayoutDashboard },
   { href: '/groups',      label: 'My Groups',  icon: Users           },
   { href: '/assignments', label: 'Assignments', icon: BookOpen        },
-  { href: '/toolkit',     label: 'AI Teacher', icon: Monitor         },
+  { href: '/toolkit',     label: 'Toolkit',    icon: Monitor         },
   { href: '/library',     label: 'Library',    icon: Library         },
 ];
 
