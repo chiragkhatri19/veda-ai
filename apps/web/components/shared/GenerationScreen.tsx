@@ -50,8 +50,8 @@ function SkLine({ w, delay, opacity = 1 }: { w: string; delay: number; opacity?:
   );
 }
 
-/* The document preview that fills in as the paper generates */
-function DocumentPreview({ progress }: { progress: number }) {
+/* The document preview — a question paper being written */
+function DocumentPreview() {
   return (
     <div className="w-[178px] bg-app-surface dark:bg-[rgb(22,22,26)] border border-app-border rounded-xl shadow-card overflow-hidden">
       {/* Paper header */}
@@ -77,7 +77,7 @@ function DocumentPreview({ progress }: { progress: number }) {
       <div className="mx-4 my-2 border-t border-dashed border-app-border/50" />
 
       {/* Section B */}
-      <div className="px-4 pb-3 space-y-2">
+      <div className="px-4 pb-4 space-y-2">
         <SkLine w="28%" delay={560} opacity={0.55} />
         <div className="space-y-1.5 pl-2">
           <SkLine w="88%" delay={640} />
@@ -87,14 +87,6 @@ function DocumentPreview({ progress }: { progress: number }) {
           <SkLine w="93%" delay={800} />
           <SkLine w="70%" delay={880} opacity={0.8} />
         </div>
-      </div>
-
-      {/* Progress fill strip at the bottom of the document */}
-      <div className="h-[3px] bg-app-surface-2">
-        <div
-          className="h-full bg-brand-orange/60 transition-all duration-700 ease-out"
-          style={{ width: `${Math.max(progress, 3)}%` }}
-        />
       </div>
     </div>
   );
@@ -173,7 +165,7 @@ export default function GenerationScreen({
       {/* Document visual */}
       <div className="mb-10 flex flex-col items-center gap-4 animate-fade-in">
         <VedaAIMark />
-        <DocumentPreview progress={displayProgress} />
+        <DocumentPreview />
       </div>
 
       {/* Heading + progress + facts */}

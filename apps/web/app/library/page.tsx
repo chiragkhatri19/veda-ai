@@ -41,7 +41,7 @@ function PaperCard({ assignment }: { assignment: Assignment }) {
   }
 
   return (
-    <div className="bg-app-surface/[0.97] rounded-2xl p-5 flex flex-col gap-4 shadow-card hover:shadow-card-hover dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.32),0_16px_40px_rgba(0,0,0,0.44)] transition-shadow duration-200 group">
+    <div className="bg-white dark:bg-app-surface rounded-2xl p-5 flex flex-col gap-4 shadow-card hover:shadow-card-hover hover:-translate-y-px dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.32),0_16px_40px_rgba(0,0,0,0.44)] transition-[box-shadow,transform] duration-200 group">
       <div className="flex items-start justify-between gap-2">
         <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
           <FileText className="w-[18px] h-[18px] text-emerald-600 dark:text-emerald-400" />
@@ -93,7 +93,7 @@ function LibrarySkeletonGrid() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {Array.from({ length: 8 }).map((_, i) => (
-        <div key={i} className="bg-app-surface/[0.97] rounded-2xl p-5 space-y-4 shadow-card">
+        <div key={i} className="bg-white dark:bg-app-surface rounded-2xl p-5 space-y-4 shadow-card">
           <div className="flex items-start justify-between">
             <div className="skeleton h-9 w-9 rounded-lg" />
             <div className="skeleton h-5 w-14 rounded-full" />
@@ -171,7 +171,7 @@ export default function LibraryPage() {
       {isLoading ? (
         <LibrarySkeletonGrid />
       ) : filtered.length === 0 ? (
-        <div className="bg-app-surface/[0.97] rounded-2xl px-6 py-16 flex flex-col items-center text-center shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
+        <div className="bg-white dark:bg-app-surface rounded-2xl px-6 py-16 flex flex-col items-center text-center shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
           <div className="w-14 h-14 rounded-2xl bg-app-surface-2 flex items-center justify-center mb-4">
             <Library className="w-7 h-7 text-app-text-muted" />
           </div>

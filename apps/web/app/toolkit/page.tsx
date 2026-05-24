@@ -52,7 +52,7 @@ export default function ToolkitPage() {
             <Link
               key={tool.id}
               href={tool.href}
-              className="group bg-app-surface/[0.97] rounded-2xl p-6 flex flex-col gap-5 shadow-card hover:shadow-card-hover dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.32),0_16px_40px_rgba(0,0,0,0.44)] transition-shadow duration-200"
+              className="group bg-white dark:bg-app-surface rounded-2xl p-6 flex flex-col gap-5 shadow-card hover:shadow-card-hover hover:-translate-y-px dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.32),0_16px_40px_rgba(0,0,0,0.44)] transition-[box-shadow,transform] duration-200"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${tool.iconBg} ${tool.iconColor}`}>
@@ -93,7 +93,7 @@ export default function ToolkitPage() {
         })}
       </div>
 
-      <div className="bg-app-surface-2/90 rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_10px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+      <div className="bg-app-surface-2 rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_10px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
         <p className="text-[13px] font-semibold text-app-text-primary">More tools are on the way</p>
         <p className="text-[12px] text-app-text-muted mt-0.5">
           Lesson Plan Builder, Student Feedback Writer, and Class Progress Analyser. Coming soon.

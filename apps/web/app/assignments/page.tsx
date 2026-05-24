@@ -135,7 +135,7 @@ export default function AssignmentsPage() {
 
       {/* Filter dropdowns */}
       {showFilters && (
-        <div className="flex items-center gap-4 mb-5 flex-wrap border border-app-border bg-app-surface-2 rounded-xl p-4 animate-fade-in">
+        <div className="flex items-center gap-4 mb-5 flex-wrap bg-app-surface-2 rounded-2xl p-4 animate-fade-in">
           <div>
             <label className="text-[11px] font-semibold text-app-text-muted uppercase tracking-wide mb-1 block">Status</label>
             <select

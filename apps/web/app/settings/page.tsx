@@ -100,7 +100,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Avatar banner */}
-      <div className="bg-app-surface/[0.97] rounded-2xl p-5 flex items-center gap-4 shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] animate-fade-in">
+      <div className="bg-white dark:bg-app-surface rounded-2xl p-5 flex items-center gap-4 shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] animate-fade-in">
         <div className="w-14 h-14 rounded-full bg-brand-orange flex items-center justify-center text-white text-[18px] font-bold shrink-0 ring-2 ring-brand-orange/20">
           {user.avatarInitials}
         </div>
@@ -112,7 +112,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Appearance */}
-      <div className="bg-app-surface/[0.97] rounded-2xl overflow-hidden shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
+      <div className="bg-white dark:bg-app-surface rounded-2xl overflow-hidden shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
         <div className="px-5 py-4 border-b border-app-border/60 bg-app-surface-2/80">
           <h2 className="text-[13px] font-bold text-app-text-primary">Appearance</h2>
           <p className="text-[11px] text-app-text-muted mt-0.5">Choose how VedaAI looks for you.</p>
@@ -135,7 +135,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Profile form */}
-      <form onSubmit={handleSave} className="bg-app-surface/[0.97] rounded-2xl overflow-hidden shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
+      <form onSubmit={handleSave} className="bg-white dark:bg-app-surface rounded-2xl overflow-hidden shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
         <div className="px-5 py-4 border-b border-app-border/60 bg-app-surface-2/80">
           <h2 className="text-[13px] font-bold text-app-text-primary">Profile Information</h2>
           <p className="text-[11px] text-app-text-muted mt-0.5">Displayed in the sidebar and printed on generated papers.</p>

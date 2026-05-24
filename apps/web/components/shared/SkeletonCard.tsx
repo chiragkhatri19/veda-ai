@@ -1,6 +1,6 @@
 export default function SkeletonCard() {
   return (
-    <div className="bg-app-surface rounded-2xl border border-app-border/60 p-5 flex flex-col gap-3 shadow-card">
+    <div className="bg-app-surface rounded-2xl p-5 flex flex-col gap-3 shadow-[0_1px_3px_rgba(16,24,40,0.06),0_4px_16px_rgba(16,24,40,0.08),0_14px_36px_-6px_rgba(16,24,40,0.06)]">
       {/* tags + menu row */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-1.5">

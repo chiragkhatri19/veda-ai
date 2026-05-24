@@ -345,7 +345,7 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
     <>
       {/* ── Desktop: floating card sidebar ──────────────────────────────── */}
       <div
-        className="hidden md:block shrink-0 relative bg-white dark:bg-app-surface rounded-r-3xl my-3 ml-3 shadow-sidebar dark:shadow-[0_4px_10px_rgba(0,0,0,0.25),0_12px_36px_rgba(0,0,0,0.38),0_28px_72px_rgba(0,0,0,0.32)] transition-[width] duration-150 ease-out overflow-hidden no-print"
+        className="hidden md:block shrink-0 relative bg-white dark:bg-app-surface rounded-3xl my-3 ml-3 shadow-sidebar dark:shadow-[0_4px_10px_rgba(0,0,0,0.25),0_12px_36px_rgba(0,0,0,0.38),0_28px_72px_rgba(0,0,0,0.32)] transition-[width] duration-150 ease-out overflow-hidden no-print"
         style={{ width: displayWidth }}
       >
         <div className="h-full w-full overflow-hidden">
@@ -369,7 +369,7 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
 
       {/* ── Mobile drawer ───────────────────────────────────────────────── */}
       <div
-        className={`md:hidden fixed inset-y-0 left-0 z-40 bg-white dark:bg-app-surface rounded-r-3xl transition-transform duration-200 ease-in-out shadow-[6px_0_12px_rgba(0,0,0,0.07),10px_0_32px_rgba(0,0,0,0.11),18px_0_56px_rgba(0,0,0,0.10)] dark:shadow-[6px_0_14px_rgba(0,0,0,0.30),12px_0_40px_rgba(0,0,0,0.42),20px_0_72px_rgba(0,0,0,0.36)] no-print ${
+        className={`md:hidden fixed inset-y-0 left-0 z-40 bg-white dark:bg-app-surface rounded-3xl my-3 ml-3 transition-transform duration-200 ease-in-out shadow-[0_4px_12px_rgba(0,0,0,0.08),0_12px_36px_rgba(0,0,0,0.12),0_28px_72px_rgba(0,0,0,0.10)] dark:shadow-[6px_0_14px_rgba(0,0,0,0.30),12px_0_40px_rgba(0,0,0,0.42),20px_0_72px_rgba(0,0,0,0.36)] no-print ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
         style={{ width: SIDEBAR_DEFAULT }}

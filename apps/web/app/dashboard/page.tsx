@@ -50,10 +50,10 @@ function RecentRow({ assignment }: { assignment: Assignment }) {
   return (
     <Link
       href={`/assignments/${assignment.id}`}
-      className="flex items-center gap-4 px-5 py-3.5 hover:bg-app-surface-2 active:bg-app-border/40 transition-colors group"
+      className="flex items-center gap-4 bg-white dark:bg-app-surface rounded-2xl px-5 py-4 shadow-[0_1px_3px_rgba(16,24,40,0.05),0_4px_14px_rgba(16,24,40,0.07),0_12px_32px_-4px_rgba(16,24,40,0.05)] hover:shadow-[0_2px_6px_rgba(16,24,40,0.07),0_8px_24px_rgba(16,24,40,0.10),0_20px_44px_-6px_rgba(16,24,40,0.07)] hover:-translate-y-px dark:shadow-[0_2px_8px_rgba(0,0,0,0.20),0_8px_22px_rgba(0,0,0,0.26)] dark:hover:shadow-[0_4px_14px_rgba(0,0,0,0.30),0_14px_36px_rgba(0,0,0,0.40)] active:scale-[0.99] transition-[box-shadow,transform] duration-200 group"
     >
       <div className="flex-1 min-w-0">
-        <p className="text-[13px] font-medium text-app-text-primary truncate group-hover:text-brand-orange transition-colors">
+        <p className="text-[13px] font-semibold text-app-text-primary truncate group-hover:text-brand-orange transition-colors duration-150">
           {assignment.title}
         </p>
         <p className="text-[11px] text-app-text-muted mt-0.5">
@@ -164,7 +164,7 @@ export default function DashboardPage() {
             </Link>
           </div>
         ) : (
-          <div className="bg-white dark:bg-app-surface rounded-2xl overflow-hidden divide-y divide-app-border/40 shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)]">
+          <div className="flex flex-col gap-2.5 stagger-grid">
             {recent.map((a) => <RecentRow key={a.id} assignment={a} />)}
           </div>
         )}
