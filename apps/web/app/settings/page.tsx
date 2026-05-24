@@ -93,7 +93,8 @@ export default function SettingsPage() {
   const selectClass = 'w-full h-9 px-3 rounded-lg border border-app-border text-[13px] text-app-text-primary bg-app-surface focus:outline-none focus:ring-2 focus:ring-brand-orange/20 focus:border-brand-orange transition-colors';
 
   return (
-    <div className="px-6 py-6 max-w-2xl space-y-6">
+    <div className="px-6 py-6 flex justify-center">
+      <div className="w-full max-w-2xl space-y-6">
       <div>
         <h1 className="text-[22px] font-bold text-app-text-primary">Settings</h1>
         <p className="text-[13px] text-app-text-secondary mt-0.5">Manage your profile, appearance, and teaching preferences.</p>
@@ -215,6 +216,7 @@ export default function SettingsPage() {
       </form>
 
       <p className="text-center text-[11px] text-app-text-muted">VedaAI · v1.0.0</p>
+      </div>
     </div>
   );
 }

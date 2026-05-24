@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ArrowLeft, Bell, ChevronDown, LayoutGrid, Menu } from 'lucide-react';
 import Link from 'next/link';
@@ -31,20 +32,6 @@ function resolveCrumb(pathname: string) {
   return { label: 'VedaAI' };
 }
 
-function VedaAILogo() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-      <rect width="32" height="32" rx="9" fill="#F97316" />
-      <path
-        d="M8 10h16M12 10l4 13 4-13"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 interface Props {
   onMenuToggle?: () => void;
@@ -94,10 +81,25 @@ export default function TopBar({ onMenuToggle }: Props) {
     <div className="sticky top-3 z-30 no-print mx-3 shrink-0">
       <header className="h-14 flex items-center px-4 gap-3 bg-white dark:bg-app-surface rounded-2xl shadow-topbar dark:shadow-[0_2px_8px_rgba(0,0,0,0.22),0_8px_28px_rgba(0,0,0,0.34),0_16px_52px_rgba(0,0,0,0.26)]">
 
-        {/* ── Mobile: logo + title ────────────────────────────────────────── */}
+        {/* ── Mobile: back button or logo ─────────────────────────────────── */}
         <div className="md:hidden flex items-center gap-2 flex-1 min-w-0">
-          <VedaAILogo />
-          <span className="text-[15px] font-bold text-app-text-primary tracking-tight">VedaAI</span>
+          {parent ? (
+            <>
+              <Link
+                href={parent.href}
+                className="p-1.5 rounded-lg text-app-text-muted hover:text-app-text-primary hover:bg-app-surface-2 active:scale-90 transition-[background-color,color,transform] duration-100 shrink-0"
+                aria-label="Go back"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </Link>
+              <span className="text-[14px] font-semibold text-app-text-primary truncate">{label}</span>
+            </>
+          ) : (
+            <>
+              <Image src="/logo.png" alt="VedaAI" width={28} height={28} className="rounded-[8px]" priority />
+              <span className="text-[15px] font-bold text-app-text-primary tracking-tight">VedaAI</span>
+            </>
+          )}
         </div>
 
         {/* ── Desktop: breadcrumb ─────────────────────────────────────────── */}
