@@ -67,9 +67,15 @@ html.dark .shell-root {
   100% { background-position:  400px 0; }
 }
 
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 1;    }
+  50%       { opacity: 0.42; }
+}
+
 @keyframes nav-progress {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(450%); }
+  0%   { transform: translateX(-100%); opacity: 1; }
+  70%  { transform: translateX(220%);  opacity: 1; }
+  100% { transform: translateX(220%);  opacity: 0; }
 }
 
 @keyframes float {
@@ -123,14 +129,13 @@ html.dark .shell-root {
 
 @layer utilities {
   .skeleton {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
-    background-size: 400px 100%;
-    animation: shimmer 1.5s ease-in-out infinite;
+    background-color: #e9eaec;
+    animation: skeletonPulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
   html.dark .skeleton {
-    background: linear-gradient(90deg, #27272a 25%, #3f3f46 50%, #27272a 75%);
-    background-size: 400px 100%;
+    background-color: #232328;
+    animation: skeletonPulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
   .scrollbar-hide {

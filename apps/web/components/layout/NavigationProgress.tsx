@@ -41,14 +41,14 @@ export default function NavigationProgress() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-x-0 top-0 z-[200] h-0.5 overflow-hidden"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[200] h-[2px] overflow-hidden"
     >
       <div
-        className={`h-full w-1/4 bg-brand-orange transition-opacity duration-200 ${
+        className={`h-full w-1/3 rounded-full bg-brand-orange transition-opacity duration-300 ${
           navigating ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
-          animation: navigating ? 'nav-progress 1s linear infinite' : 'none',
+          animation: navigating ? 'nav-progress 1.1s cubic-bezier(0.4,0,0.2,1) infinite' : 'none',
         }}
       />
     </div>
