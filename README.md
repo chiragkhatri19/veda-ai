@@ -4,7 +4,7 @@ Most AI tools hand you a list of questions. VedaAI hands you an exam paper — s
 
 Built for Indian school teachers. CBSE and ICSE curriculum. Under two minutes.
 
-**Live →** https://veda-ai-tawny.vercel.app
+**Live →** https://vedaai-chirag-khatri.vercel.app
 **API health →** https://api-production-eeb3.up.railway.app/api/health
 
 ---
