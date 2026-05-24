@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { ChevronDown, ArrowLeft } from 'lucide-react';
 import SectionBlock from './SectionBlock';
 import ActionBar from './ActionBar';
 import type { Assignment } from '@veda/shared';
@@ -19,6 +20,13 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
 
   return (
     <div className="px-6 py-6 max-w-4xl mx-auto print:px-0 print:py-0 print:mx-0 print:max-w-none question-paper-print">
+      <Link
+        href="/assignments"
+        className="inline-flex items-center gap-1.5 text-[13px] text-app-text-muted hover:text-app-text-primary transition-colors mb-6 no-print"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Assignments
+      </Link>
       <ActionBar
         assignmentId={assignment.id}
         assignmentTitle={assignment.title}

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, Users, BookOpen, Monitor,
-  Library, Settings, X, Plus, ChevronsLeft, ChevronsRight,
+  Library, Settings, X, Plus, ChevronsLeft, ChevronsRight, Sparkles,
 } from 'lucide-react';
 import { useAssignmentStore } from '@/store/assignmentStore';
 import { useUserStore } from '@/store/userStore';
@@ -29,11 +29,17 @@ const NAV_ITEMS = [
 function VedaAILogo() {
   return (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-      <rect width="32" height="32" rx="9" fill="#F97316" />
+      <defs>
+        <linearGradient id="vl-g" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FB923C" />
+          <stop offset="100%" stopColor="#DC2626" />
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="9" fill="url(#vl-g)" />
       <path
         d="M8 10h16M12 10l4 13 4-13"
         stroke="white"
-        strokeWidth="2.5"
+        strokeWidth="2.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -88,14 +94,14 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
       <Link
         href="/assignments/create"
         title="New Assignment"
-        className="w-9 h-9 flex items-center justify-center rounded-xl bg-brand-dark text-white border border-brand-orange/30 hover:opacity-90 active:scale-90 active:opacity-75 transition-[opacity,transform] duration-150 mb-5 shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.20)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
+        className="w-9 h-9 flex items-center justify-center rounded-xl bg-brand-dark text-white border-2 border-brand-orange/50 hover:opacity-90 active:scale-90 active:opacity-75 transition-[opacity,transform] duration-150 mb-5 shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.20)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
       >
-        <Plus className="w-4 h-4" strokeWidth={2.5} />
+        <Sparkles className="w-4 h-4" strokeWidth={2} />
       </Link>
 
-      <div className="w-6 border-t border-app-border/40 mb-3" />
+      <div className="w-6 border-t border-app-border/40 mb-4" />
 
-      <nav className="flex flex-col gap-1.5 flex-1 w-full px-2">
+      <nav className="flex flex-col gap-1.5 flex-1 w-full px-2 pt-1">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
           return (
@@ -188,16 +194,16 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
         <Link
           href="/assignments/create"
           onClick={onClose}
-          className="flex items-center justify-center gap-2 w-full bg-brand-dark text-white text-[13px] font-semibold py-3 rounded-2xl border border-brand-orange/30 hover:opacity-90 active:scale-[0.97] active:opacity-80 transition-[opacity,transform] duration-150 shadow-[0_2px_8px_rgba(0,0,0,0.20)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
+          className="flex items-center justify-center gap-2 w-full bg-brand-dark text-white text-[13px] font-semibold py-3 rounded-2xl border-2 border-brand-orange/50 hover:opacity-90 active:scale-[0.97] active:opacity-80 transition-[opacity,transform] duration-150 shadow-[0_2px_8px_rgba(0,0,0,0.20)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
         >
-          <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
+          <Sparkles className="w-3.5 h-3.5" strokeWidth={2} />
           {showLabels && 'Create Assignment'}
         </Link>
       </div>
 
-      <div className="mx-4 mt-5 mb-3 border-t border-app-border/40 shrink-0" />
+      <div className="mx-4 mt-5 mb-4 border-t border-app-border/40 shrink-0" />
 
-      <nav className="flex-1 px-2 space-y-1 overflow-y-auto scrollbar-hide">
+      <nav className="flex-1 px-2 space-y-1 overflow-y-auto scrollbar-hide pt-1">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
           const badge = label === 'Assignments' && completedCount > 0 ? completedCount : null;
@@ -263,7 +269,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
           </div>
           {showLabels && (
             <div className="min-w-0 flex-1">
-              <p className="text-[12px] font-semibold text-app-text-primary leading-tight truncate">{school}</p>
+              <p className="text-[12px] font-semibold text-app-text-secondary leading-tight truncate">{school}</p>
               <p className="text-[11px] text-app-text-muted leading-tight truncate">{city}</p>
             </div>
           )}
