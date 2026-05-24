@@ -12,9 +12,12 @@ export const metadata: Metadata = {
   title: 'VedaAI - Assessment Engine',
   description: 'AI-powered engine for generating print-ready, curriculum-aligned assessments at scale',
   icons: {
-    icon: '/logo.png',
+    icon: [
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo.png', sizes: '48x48', type: 'image/png' },
+    ],
     shortcut: '/logo.png',
-    apple: '/logo.png',
+    apple: { url: '/logo.png', sizes: '180x180', type: 'image/png' },
   },
 };
 
@@ -22,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/logo.png" sizes="32x32" type="image/png" />
         {/* FOUC prevention: dark is default; only opt out explicitly */}
         <script
           dangerouslySetInnerHTML={{
