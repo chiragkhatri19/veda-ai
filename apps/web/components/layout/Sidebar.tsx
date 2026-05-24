@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  LayoutDashboard, Users, BookOpen, Wrench,
+  LayoutDashboard, Users, BookOpen, Monitor,
   Library, Settings, X, Plus, ChevronsLeft, ChevronsRight,
 } from 'lucide-react';
 import { useAssignmentStore } from '@/store/assignmentStore';
@@ -22,7 +22,7 @@ const NAV_ITEMS = [
   { href: '/dashboard',   label: 'Home',                icon: LayoutDashboard },
   { href: '/groups',      label: 'My Groups',           icon: Users           },
   { href: '/assignments', label: 'Assignments',          icon: BookOpen        },
-  { href: '/toolkit',     label: "AI Teacher's Toolkit", icon: Wrench          },
+  { href: '/toolkit',     label: "AI Teacher's Toolkit", icon: Monitor         },
   { href: '/library',     label: 'My Library',          icon: Library         },
 ];
 
@@ -68,7 +68,7 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
   const { assignments } = useAssignmentStore();
   const { avatarInitials, school, city } = useUserStore();
 
-  const completedCount = assignments.filter((a) => a.jobStatus === 'completed').length;
+  const completedCount = assignments.length;
 
   return (
     <div className="h-full w-full bg-transparent flex flex-col items-center pt-5 pb-4 gap-1">
@@ -115,7 +115,7 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
             >
               <Icon className="w-[16px] h-[16px]" />
               {label === 'Assignments' && completedCount > 0 && (
-                <span className="absolute -top-1 -right-1 text-[9px] font-bold text-white bg-emerald-500 rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-[3px] leading-none shadow-sm">
+                <span className="absolute -top-1 -right-1 text-[9px] font-bold text-white bg-brand-orange rounded-full min-w-[15px] h-[15px] flex items-center justify-center px-[3px] leading-none shadow-sm">
                   {completedCount > 99 ? '99+' : completedCount}
                 </span>
               )}
@@ -154,7 +154,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
   const { assignments } = useAssignmentStore();
   const { school, city, avatarInitials } = useUserStore();
 
-  const completedCount = assignments.filter((a) => a.jobStatus === 'completed').length;
+  const completedCount = assignments.length;
   const showLabels = width >= 160;
 
   return (
@@ -216,7 +216,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
               href={href}
               onClick={onClose}
               title={showLabels ? undefined : label}
-              className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-[12.5px] font-medium active:scale-[0.98] transition-[background-color,color,transform] duration-100 ${
+              className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] font-medium active:scale-[0.98] transition-[background-color,color,transform] duration-100 ${
                 active
                   ? 'bg-orange-50/90 dark:bg-orange-950/40 text-brand-orange'
                   : 'text-app-text-secondary hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-app-text-primary'
@@ -227,7 +227,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
                 <>
                   <span className="flex-1 truncate">{label}</span>
                   {badge && (
-                    <span className="bg-emerald-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center leading-none shrink-0">
+                    <span className="bg-brand-orange text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center leading-none shrink-0">
                       {badge > 99 ? '99+' : badge}
                     </span>
                   )}
@@ -244,7 +244,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
           href="/settings"
           onClick={onClose}
           title={showLabels ? undefined : 'Settings'}
-          className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-[12.5px] font-medium active:scale-[0.98] transition-[background-color,color,transform] duration-100 ${
+          className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] font-medium active:scale-[0.98] transition-[background-color,color,transform] duration-100 ${
             pathname === '/settings'
               ? 'bg-orange-50/90 dark:bg-orange-950/40 text-brand-orange'
               : 'text-app-text-secondary hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-app-text-primary'
@@ -345,7 +345,7 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
     <>
       {/* ── Desktop: floating card sidebar ──────────────────────────────── */}
       <div
-        className="hidden md:block shrink-0 relative bg-white dark:bg-app-surface rounded-r-3xl my-3 ml-3 shadow-sidebar dark:shadow-[0_4px_10px_rgba(0,0,0,0.25),0_12px_36px_rgba(0,0,0,0.38),0_28px_72px_rgba(0,0,0,0.32)] transition-[width] duration-150 ease-out overflow-hidden"
+        className="hidden md:block shrink-0 relative bg-white dark:bg-app-surface rounded-r-3xl my-3 ml-3 shadow-sidebar dark:shadow-[0_4px_10px_rgba(0,0,0,0.25),0_12px_36px_rgba(0,0,0,0.38),0_28px_72px_rgba(0,0,0,0.32)] transition-[width] duration-150 ease-out overflow-hidden no-print"
         style={{ width: displayWidth }}
       >
         <div className="h-full w-full overflow-hidden">
@@ -369,7 +369,7 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
 
       {/* ── Mobile drawer ───────────────────────────────────────────────── */}
       <div
-        className={`md:hidden fixed inset-y-0 left-0 z-40 bg-white dark:bg-app-surface rounded-r-3xl transition-transform duration-200 ease-in-out shadow-[6px_0_12px_rgba(0,0,0,0.07),10px_0_32px_rgba(0,0,0,0.11),18px_0_56px_rgba(0,0,0,0.10)] dark:shadow-[6px_0_14px_rgba(0,0,0,0.30),12px_0_40px_rgba(0,0,0,0.42),20px_0_72px_rgba(0,0,0,0.36)] ${
+        className={`md:hidden fixed inset-y-0 left-0 z-40 bg-white dark:bg-app-surface rounded-r-3xl transition-transform duration-200 ease-in-out shadow-[6px_0_12px_rgba(0,0,0,0.07),10px_0_32px_rgba(0,0,0,0.11),18px_0_56px_rgba(0,0,0,0.10)] dark:shadow-[6px_0_14px_rgba(0,0,0,0.30),12px_0_40px_rgba(0,0,0,0.42),20px_0_72px_rgba(0,0,0,0.36)] no-print ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
         style={{ width: SIDEBAR_DEFAULT }}

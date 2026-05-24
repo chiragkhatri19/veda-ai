@@ -89,8 +89,8 @@ html.dark .shell-root {
 
 @layer base {
   html {
-    font-family: var(--font-sans), system-ui, sans-serif;
-    font-feature-settings: "cv11", "ss01";
+    font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "tnum";
   }
 
   * {
@@ -175,7 +175,7 @@ html.dark .shell-root {
 
 /* ─── Print ──────────────────────────────────────────────────────────── */
 @page {
-  margin: 1.5cm;
+  margin: 1cm 1.2cm;
   size: A4 portrait;
 }
 

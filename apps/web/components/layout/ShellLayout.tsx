@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Sidebar, { SIDEBAR_DEFAULT } from './Sidebar';
 import TopBar from './TopBar';
+import MobileDock from './MobileDock';
 import NavigationProgress from './NavigationProgress';
 import { useUserStore } from '@/store/userStore';
 import { useNotificationStore } from '@/store/notificationStore';
@@ -39,7 +40,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
 
       {/* Mobile sidebar backdrop — always in DOM, transitions opacity */}
       <div
-        className={`md:hidden fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity duration-200 ${
+        className={`md:hidden fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity duration-200 no-print ${
           sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setSidebarOpen(false)}
@@ -48,10 +49,12 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
 
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden print:block print:overflow-visible">
         <TopBar onMenuToggle={() => setSidebarOpen((o) => !o)} />
-        <main className="flex-1 overflow-y-auto print:overflow-visible bg-app-bg">
+        <main className="flex-1 overflow-y-auto print:overflow-visible bg-app-bg pb-24 md:pb-0">
           {children}
         </main>
       </div>
+
+      <MobileDock />
     </div>
   );
 }

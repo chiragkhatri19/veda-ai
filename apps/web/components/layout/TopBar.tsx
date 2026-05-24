@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
-import { ArrowLeft, Menu, Bell, ChevronDown, LayoutGrid } from 'lucide-react';
+import { ArrowLeft, Bell, ChevronDown, LayoutGrid } from 'lucide-react';
 import Link from 'next/link';
 import { useUserStore } from '@/store/userStore';
 import { useUnreadCount } from '@/store/notificationStore';
@@ -159,14 +159,6 @@ export default function TopBar({ onMenuToggle }: Props) {
             <span className="text-white text-[11px] font-bold">{avatarInitials}</span>
           </Link>
 
-          {/* Mobile hamburger — right side */}
-          <button
-            onClick={onMenuToggle}
-            className="md:hidden p-2 rounded-lg text-app-text-muted hover:bg-app-surface-2 hover:text-app-text-primary active:scale-90 transition-[background-color,color,transform] duration-100"
-            aria-label="Toggle navigation"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
         </div>
       </header>
     </div>

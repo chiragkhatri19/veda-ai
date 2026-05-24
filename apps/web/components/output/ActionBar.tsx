@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Download, RefreshCw, Printer } from 'lucide-react';
+import { Download, RefreshCw, Printer, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 import { api } from '@/lib/api';
 
@@ -52,26 +52,34 @@ export default function ActionBar({ assignmentId, assignmentTitle, generatedAt, 
   });
 
   return (
-    <div className="no-print mb-6 bg-[#111827] rounded-2xl px-5 py-4 flex items-center justify-between flex-wrap gap-3">
-      {/* Left: title + timestamp */}
-      <div className="min-w-0">
-        <p className="text-white font-bold text-[15px] tracking-tight truncate">{assignmentTitle}</p>
-        <p className="text-zinc-400 text-[12px] mt-0.5">Generated {timeStr}</p>
+    <div className="no-print mb-6 bg-white dark:bg-app-surface rounded-2xl shadow-card dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] overflow-hidden">
+      {/* AI context strip */}
+      <div className="px-5 py-4 flex items-start gap-3 border-b border-app-border/50">
+        <div className="w-7 h-7 rounded-full bg-brand-orange/10 flex items-center justify-center shrink-0 mt-0.5">
+          <Sparkles className="w-3.5 h-3.5 text-brand-orange" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-[13.5px] text-app-text-secondary leading-relaxed">
+            Your question paper for{' '}
+            <span className="font-semibold text-app-text-primary">{assignmentTitle}</span>{' '}
+            is ready. Generated {timeStr}.
+          </p>
+        </div>
       </div>
 
-      {/* Right: action buttons */}
-      <div className="flex items-center gap-2 flex-wrap shrink-0">
+      {/* Actions row */}
+      <div className="px-5 py-3 flex items-center gap-2 flex-wrap">
         <button
           onClick={handleRegenerate}
           disabled={regenerating}
-          className="inline-flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium text-white/80 border border-white/20 rounded-full hover:bg-white/10 active:scale-[0.97] transition-[background-color,transform] duration-100 disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-[12px] font-medium text-app-text-secondary border border-app-border rounded-full hover:bg-app-surface-2 active:scale-[0.97] transition-[background-color,transform] duration-100 disabled:opacity-50"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${regenerating ? 'animate-spin' : ''}`} />
           Regenerate
         </button>
         <button
           onClick={() => window.print()}
-          className="inline-flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium text-white/80 border border-white/20 rounded-full hover:bg-white/10 active:scale-[0.97] transition-[background-color,transform] duration-100"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-[12px] font-medium text-app-text-secondary border border-app-border rounded-full hover:bg-app-surface-2 active:scale-[0.97] transition-[background-color,transform] duration-100"
         >
           <Printer className="w-3.5 h-3.5" />
           Print
@@ -79,10 +87,10 @@ export default function ActionBar({ assignmentId, assignmentTitle, generatedAt, 
         <button
           onClick={handleDownloadPdf}
           disabled={downloading}
-          className="inline-flex items-center gap-1.5 px-4 py-2 text-[12px] font-semibold text-[#111827] bg-white rounded-full hover:bg-zinc-100 active:scale-[0.97] transition-[background-color,transform] duration-100 disabled:opacity-60"
+          className="inline-flex items-center gap-1.5 px-4 py-2 text-[12px] font-semibold text-white bg-[#111827] dark:bg-brand-dark rounded-full hover:opacity-90 active:scale-[0.97] transition-[opacity,transform] duration-100 disabled:opacity-60 ml-auto"
         >
           <Download className="w-3.5 h-3.5" />
-          {downloading ? 'Saving…' : 'Download PDF'}
+          {downloading ? 'Saving…' : 'Download as PDF'}
         </button>
       </div>
     </div>

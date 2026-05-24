@@ -18,7 +18,7 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
   const gradeLabel = paper.grade || assignment.grade;
 
   return (
-    <div className="px-6 py-6 max-w-4xl print:px-0 print:py-0 print:max-w-none question-paper-print">
+    <div className="px-6 py-6 max-w-4xl mx-auto print:px-0 print:py-0 print:max-w-none question-paper-print">
       <ActionBar
         assignmentId={assignment.id}
         assignmentTitle={assignment.title}
@@ -27,7 +27,7 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
       />
 
       {/* Paper card */}
-      <div className="bg-white dark:bg-app-surface rounded-[24px] shadow-[0px_4px_18px_rgba(16,24,40,0.04),0px_1px_4px_rgba(16,24,40,0.08)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] print:shadow-none print:rounded-none print:bg-white">
+      <div className="bg-white dark:bg-app-surface rounded-[24px] shadow-[0_2px_8px_rgba(16,24,40,0.06),0_8px_28px_rgba(16,24,40,0.10),0_20px_56px_-8px_rgba(16,24,40,0.08)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.22),0_10px_32px_rgba(0,0,0,0.34),0_24px_64px_rgba(0,0,0,0.28)] print:shadow-none print:rounded-none print:bg-white">
         <div className="p-8 sm:p-12 print:p-0 max-w-3xl mx-auto print:max-w-none print:mx-0">
 
           {/* School / exam header */}
