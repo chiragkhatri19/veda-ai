@@ -152,7 +152,7 @@ export default function RubricGeneratorPage() {
       </div>
 
       {/* Form */}
-      <form onSubmit={handleGenerate} className="no-print bg-app-surface border border-app-border rounded-xl p-5 space-y-4">
+      <form onSubmit={handleGenerate} className="no-print bg-app-surface rounded-xl p-5 space-y-4 shadow-card">
         <h2 className="text-[14px] font-semibold text-app-text-primary">Assessment Details</h2>
 
         <div>
@@ -284,7 +284,7 @@ export default function RubricGeneratorPage() {
           </div>
 
           {/* Rubric table */}
-          <div className="rubric-print-area bg-app-surface border border-app-border rounded-xl overflow-x-auto">
+          <div className="rubric-print-area bg-app-surface rounded-xl overflow-x-auto shadow-card">
             <table className="w-full text-[12px]">
               <thead>
                 <tr className="border-b border-app-border bg-app-surface-2">

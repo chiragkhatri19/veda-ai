@@ -13,7 +13,7 @@ export default function DashboardLoading() {
       {/* Stats — 2-col mobile, 4-col desktop (matches actual grid) */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="bg-app-surface rounded-xl border border-app-border p-5 flex flex-col gap-3">
+          <div key={i} className="bg-app-surface rounded-xl p-5 flex flex-col gap-3 shadow-card">
             <div className="skeleton h-9 w-9 rounded-lg" />
             <div className="space-y-2">
               <div className="skeleton h-8 w-12 rounded" />
@@ -28,7 +28,7 @@ export default function DashboardLoading() {
         <div className="skeleton h-2.5 w-24 rounded" />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="bg-app-surface border border-app-border rounded-xl p-4 flex items-center justify-between">
+            <div key={i} className="bg-app-surface rounded-xl p-4 flex items-center justify-between shadow-card">
               <div className="space-y-1.5">
                 <div className="skeleton h-3.5 w-28 rounded" />
                 <div className="skeleton h-3 w-36 rounded" />
@@ -42,7 +42,7 @@ export default function DashboardLoading() {
       {/* Recent activity */}
       <div className="space-y-3">
         <div className="skeleton h-2.5 w-28 rounded" />
-        <div className="bg-app-surface border border-app-border rounded-xl overflow-hidden divide-y divide-app-border/60">
+        <div className="bg-app-surface rounded-xl overflow-hidden divide-y divide-app-border/60 shadow-card">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex items-center gap-4 px-5 py-3.5">
               <div className="skeleton w-1.5 h-1.5 rounded-full shrink-0" />

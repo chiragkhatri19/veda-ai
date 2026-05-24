@@ -11,7 +11,7 @@ export default function RubricLoading() {
       </div>
 
       {/* Form card */}
-      <div className="bg-app-surface border border-app-border rounded-xl p-5 space-y-4">
+      <div className="bg-app-surface rounded-xl p-5 space-y-4 shadow-card">
         <div className="skeleton h-4 w-36 rounded" />
 
         {/* Topic field */}

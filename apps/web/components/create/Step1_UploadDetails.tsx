@@ -144,7 +144,7 @@ export default function Step1_UploadDetails() {
       </div>
 
       {/* Main card */}
-      <div className="bg-app-surface rounded-2xl border border-app-border overflow-hidden shadow-[0_2px_20px_rgba(0,0,0,0.07),0_0_0_0.5px_rgba(0,0,0,0.03)] dark:shadow-[0_2px_20px_rgba(0,0,0,0.35)]">
+      <div className="bg-app-surface rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover dark:shadow-[0_2px_8px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.28)] transition-shadow duration-200">
         <div className="px-6 py-5 border-b border-app-border bg-app-surface">
           <h2 className="text-[15px] font-semibold text-app-text-primary">Assignment Details</h2>
           <p className="text-[12px] text-app-text-muted mt-0.5">Basic information about your assignment</p>

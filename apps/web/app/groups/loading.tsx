@@ -15,8 +15,8 @@ export default function GroupsLoading() {
         {Array.from({ length: 6 }).map((_, i) => (
           <div
             key={i}
-            className="bg-app-surface rounded-xl border border-app-border p-5 flex flex-col gap-4"
-            style={{ borderTopWidth: 3 }}
+            className="bg-app-surface rounded-xl p-5 flex flex-col gap-4 shadow-card"
+            style={{ borderTop: '3px solid #e5e7eb' }}
           >
             {/* Row 1: icon + edit/delete buttons */}
             <div className="flex items-start justify-between gap-2">

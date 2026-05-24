@@ -34,12 +34,13 @@ const config: Config = {
         serif: ['var(--font-serif)', 'Georgia', 'serif'],
       },
       boxShadow: {
-        /* Multi-layer, no border rings — pure shadow depth */
-        card:        '0px 4px 18px rgba(16,24,40,0.03), 0px 1px 3px rgba(16,24,40,0.06)',
-        'card-hover':'0px 8px 32px rgba(16,24,40,0.07), 0px 2px 8px rgba(16,24,40,0.10)',
+        /* Cards — three-layer ambient shadow; negative spread on outer layer creates the "thinning edge" effect */
+        card:        '0 1px 3px rgba(16,24,40,0.05), 0 4px 16px rgba(16,24,40,0.07), 0 14px 36px -6px rgba(16,24,40,0.05)',
+        'card-hover':'0 2px 6px rgba(16,24,40,0.07), 0 8px 28px rgba(16,24,40,0.11), 0 22px 48px -8px rgba(16,24,40,0.07)',
+        /* Floating panels */
         dropdown:    '0 4px 6px rgba(16,24,40,0.04), 0 10px 28px rgba(16,24,40,0.10), 0 24px 48px -8px rgba(16,24,40,0.06)',
-        sidebar:     '0 2px 6px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.14), 0 32px 80px -8px rgba(0,0,0,0.20)',
-        topbar:      '0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.08), 0 16px 40px -8px rgba(0,0,0,0.06)',
+        sidebar:     '0 4px 8px rgba(0,0,0,0.07), 0 10px 28px rgba(0,0,0,0.11), 0 24px 64px rgba(0,0,0,0.12), 0 40px 96px -8px rgba(0,0,0,0.09)',
+        topbar:      '0 2px 6px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.08), 0 16px 44px -4px rgba(0,0,0,0.07)',
       },
       animation: {
         shimmer:     'shimmer 1.5s ease-in-out infinite',

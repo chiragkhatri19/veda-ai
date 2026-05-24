@@ -5,7 +5,7 @@ export default function AssignmentDetailLoading() {
       <div className="skeleton h-4 w-24 rounded mb-6" />
 
       {/* Progress card */}
-      <div className="max-w-lg bg-app-surface border border-app-border rounded-2xl p-8 space-y-6">
+      <div className="max-w-lg bg-app-surface rounded-2xl p-8 space-y-6 shadow-card">
         <div className="space-y-2">
           <div className="skeleton h-5 w-48 rounded" />
           <div className="skeleton h-4 w-64 rounded" />

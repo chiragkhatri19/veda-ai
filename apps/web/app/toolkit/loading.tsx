@@ -13,7 +13,7 @@ export default function ToolkitLoading() {
       {/* Tool cards — 2-col on lg */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {Array.from({ length: 2 }).map((_, i) => (
-          <div key={i} className="bg-app-surface rounded-2xl border border-app-border p-6 flex flex-col gap-5">
+          <div key={i} className="bg-app-surface rounded-2xl p-6 flex flex-col gap-5 shadow-card">
             {/* Icon + badge */}
             <div className="flex items-start justify-between gap-3">
               <div className="skeleton w-12 h-12 rounded-2xl shrink-0" />
@@ -40,7 +40,7 @@ export default function ToolkitLoading() {
       </div>
 
       {/* "More tools" banner */}
-      <div className="bg-app-surface-2 border border-app-border rounded-xl p-5 space-y-1.5">
+      <div className="bg-app-surface-2 rounded-xl p-5 space-y-1.5 shadow-card">
         <div className="skeleton h-3.5 w-40 rounded" />
         <div className="skeleton h-3 w-72 rounded" />
       </div>

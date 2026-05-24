@@ -8,7 +8,7 @@ export default function SettingsLoading() {
       </div>
 
       {/* Avatar banner */}
-      <div className="bg-app-surface border border-app-border rounded-xl p-5 flex items-center gap-4">
+      <div className="bg-app-surface rounded-xl p-5 flex items-center gap-4 shadow-card">
         <div className="skeleton w-14 h-14 rounded-full shrink-0" />
         <div className="flex-1 min-w-0 space-y-2">
           <div className="skeleton h-4 w-36 rounded" />
@@ -18,7 +18,7 @@ export default function SettingsLoading() {
       </div>
 
       {/* Form card */}
-      <div className="bg-app-surface border border-app-border rounded-xl overflow-hidden">
+      <div className="bg-app-surface rounded-xl overflow-hidden shadow-card">
         {/* Profile section header */}
         <div className="px-5 py-4 border-b border-app-border bg-app-surface-2/50 space-y-1">
           <div className="skeleton h-3.5 w-36 rounded" />

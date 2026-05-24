@@ -91,8 +91,8 @@ export default function TopBar({ onMenuToggle }: Props) {
   );
 
   return (
-    <div className="sticky top-0 z-30 no-print bg-white dark:bg-app-surface border-b border-zinc-200 dark:border-zinc-800 shrink-0">
-      <header className="h-14 flex items-center px-4 gap-3">
+    <div className="sticky top-3 z-30 no-print mx-3 shrink-0">
+      <header className="h-14 flex items-center px-4 gap-3 bg-white dark:bg-app-surface rounded-2xl shadow-topbar dark:shadow-[0_2px_8px_rgba(0,0,0,0.22),0_8px_28px_rgba(0,0,0,0.34),0_16px_52px_rgba(0,0,0,0.26)]">
 
         {/* ── Mobile: logo + title ────────────────────────────────────────── */}
         <div className="md:hidden flex items-center gap-2 flex-1 min-w-0">

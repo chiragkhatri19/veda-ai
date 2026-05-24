@@ -146,7 +146,7 @@ html.dark .shell-root {
   }
 
   .card-hover {
-    @apply transition-all hover:shadow-md hover:-translate-y-px;
+    @apply transition-[box-shadow,transform] duration-200 hover:shadow-card-hover hover:-translate-y-px;
   }
 
   /* GPU-composited animations — hint the browser */
