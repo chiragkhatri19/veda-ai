@@ -72,7 +72,6 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
 
   return (
     <div className="h-full w-full bg-transparent flex flex-col items-center pt-5 pb-4 gap-1">
-      {/* Logo + collapse toggle — generous top space */}
       <div className="flex flex-col items-center gap-3 mb-5">
         <VedaAILogo />
         {onExpand && (
@@ -86,7 +85,6 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
         )}
       </div>
 
-      {/* Create button — prominent, separated from nav */}
       <Link
         href="/assignments/create"
         title="New Assignment"
@@ -95,10 +93,8 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
         <Plus className="w-4 h-4" strokeWidth={2.5} />
       </Link>
 
-      {/* Subtle divider */}
       <div className="w-6 border-t border-app-border/40 mb-3" />
 
-      {/* Nav */}
       <nav className="flex flex-col gap-1.5 flex-1 w-full px-2">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
@@ -160,7 +156,6 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
   return (
     <div className="h-full w-full bg-transparent flex flex-col overflow-hidden">
 
-      {/* Logo — generous top padding, breathing room */}
       <div className="px-5 pt-6 pb-5 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2.5 min-w-0">
           <VedaAILogo />
@@ -189,7 +184,6 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
         </div>
       </div>
 
-      {/* Create Assignment — prominent, high-contrast, own visual zone */}
       <div className="px-3 mb-1 shrink-0">
         <Link
           href="/assignments/create"
@@ -201,10 +195,8 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
         </Link>
       </div>
 
-      {/* Divider separates the primary CTA from the navigation */}
       <div className="mx-4 mt-5 mb-3 border-t border-app-border/40 shrink-0" />
 
-      {/* Nav — lighter weight, more space between items */}
       <nav className="flex-1 px-2 space-y-1 overflow-y-auto scrollbar-hide">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
@@ -238,7 +230,6 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
         })}
       </nav>
 
-      {/* Bottom section — settings + theme + profile */}
       <div className="px-2 pb-4 pt-3 shrink-0">
         <Link
           href="/settings"

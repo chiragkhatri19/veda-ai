@@ -78,7 +78,11 @@ RULES:
 6. Time allowed should be appropriate for ${totalMarks} marks (roughly 1 minute per mark, rounded to nearest 15 min).
 7. Question IDs must be unique strings like "q1", "q2", etc.
 8. Section IDs must be unique like "sec-a", "sec-b", etc.
-9. DIAGRAMS: For every question of type "diagram_graph", you MUST populate the "diagramDescription" field with a precise, detailed description of exactly what diagram, graph, chart, or figure should appear on the paper. Be specific — include axis labels, units, data ranges, key components to label, or structural parts to show. The question text must also reference the figure (e.g. "Study the diagram below and answer:" or "The graph below shows… Using it, answer:"). For all other question types, set "diagramDescription" to null.
+9. DIAGRAMS: For every question of type "diagram_graph" you MUST:
+   a) Set "diagramDescription" to a 1-2 sentence plain-English description of what the figure shows.
+   b) Set "diagramData" to an object with: "type" (one of "line", "bar", "scatter"), "title" (short chart title), "xLabel" (axis label with unit, e.g. "Time (s)"), "yLabel" (axis label with unit, e.g. "Distance (m)"), and "data" (array of 5-8 points, each with "name" as the x-axis tick string and "value" as the numeric y value). Pick real, curriculum-appropriate data values that match the question.
+   c) Make the question text reference the figure, e.g. "Study the graph below and answer:".
+   For all other question types, set both "diagramDescription" and "diagramData" to null.
 
 REQUIRED JSON SCHEMA (return an object matching this exactly):
 {
@@ -106,7 +110,8 @@ REQUIRED JSON SCHEMA (return an object matching this exactly):
           "marks": 2,
           "answer": "The complete model answer goes here.",
           "hint": "Optional hint or null",
-          "diagramDescription": null
+          "diagramDescription": null,
+          "diagramData": null
         }
       ]
     }

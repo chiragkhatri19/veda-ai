@@ -10,6 +10,19 @@ const DifficultySchema = z.string()
   })
   .pipe(z.enum(['easy', 'moderate', 'hard']));
 
+const DiagramDataPointSchema = z.object({
+  name: z.union([z.string(), z.number()]).transform(String),
+  value: z.number(),
+});
+
+const DiagramDataSchema = z.object({
+  type: z.enum(['line', 'bar', 'scatter']),
+  title: z.string().nullish().transform((v) => v ?? null),
+  xLabel: z.string().nullish().transform((v) => v ?? null),
+  yLabel: z.string().nullish().transform((v) => v ?? null),
+  data: z.array(DiagramDataPointSchema),
+}).nullish().transform((v) => v ?? null);
+
 const QuestionSchema = z.object({
   id: z.string(),
   questionNumber: z.number(),
@@ -20,6 +33,7 @@ const QuestionSchema = z.object({
   answer: z.string().nullish().transform((v) => v ?? null),
   hint: z.string().nullish().transform((v) => v ?? null),
   diagramDescription: z.string().nullish().transform((v) => v ?? null),
+  diagramData: DiagramDataSchema,
 });
 
 const SectionSchema = z.object({

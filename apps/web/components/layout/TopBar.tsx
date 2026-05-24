@@ -128,12 +128,10 @@ export default function TopBar({ onMenuToggle }: Props) {
         {/* ── Right cluster ───────────────────────────────────────────────── */}
         <div className="flex items-center gap-1 shrink-0">
 
-          {/* Theme toggle — desktop only */}
           <div className="hidden md:block">
             <ThemeToggle />
           </div>
 
-          {/* Notification bell — both */}
           {BellButton}
 
           {/* Desktop: divider + full user pill */}
@@ -159,7 +157,6 @@ export default function TopBar({ onMenuToggle }: Props) {
             <span className="text-white text-[11px] font-bold">{avatarInitials}</span>
           </Link>
 
-          {/* Mobile hamburger — opens sidebar drawer */}
           <button
             onClick={onMenuToggle}
             className="md:hidden p-2 rounded-lg text-app-text-muted hover:bg-app-surface-2 hover:text-app-text-primary active:scale-90 transition-[background-color,color,transform] duration-100"

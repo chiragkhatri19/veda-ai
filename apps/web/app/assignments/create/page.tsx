@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function CreateAssignmentPage() {
   return (
-    <div className="px-4 sm:px-6 py-6 max-w-3xl">
+    <div className="px-4 sm:px-6 py-6 max-w-3xl mx-auto">
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-0.5">
           <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />

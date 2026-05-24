@@ -6,6 +6,21 @@ export interface QuestionTypeConfig {
   marksPerQuestion: number;
 }
 
+export type DiagramType = 'line' | 'bar' | 'scatter';
+
+export interface DiagramDataPoint {
+  name: string;
+  value: number;
+}
+
+export interface DiagramData {
+  type: DiagramType;
+  title: string | null;
+  xLabel: string | null;
+  yLabel: string | null;
+  data: DiagramDataPoint[];
+}
+
 export interface GeneratedQuestion {
   id: string;
   questionNumber: number;
@@ -16,6 +31,7 @@ export interface GeneratedQuestion {
   answer: string | null;
   hint: string | null;
   diagramDescription: string | null;
+  diagramData: DiagramData | null;
 }
 
 export interface GeneratedSection {

@@ -330,4 +330,12 @@ html.dark .shell-root {
   .print-expand {
     display: block !important;
   }
+
+  /* SVG diagram charts: render in dark gray for grayscale printing */
+  .diagram-svg line,
+  .diagram-svg polyline { stroke: #374151 !important; }
+  .diagram-svg circle { fill: #374151 !important; stroke: #374151 !important; }
+  .diagram-svg rect.chart-bar { fill: #d1d5db !important; stroke: #374151 !important; }
+  .diagram-svg text { fill: #374151 !important; }
+  .diagram-svg .chart-grid { stroke: #e5e7eb !important; }
 }

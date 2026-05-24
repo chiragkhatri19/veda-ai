@@ -38,7 +38,6 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
         onResize={handleSidebarResize}
       />
 
-      {/* Mobile sidebar backdrop — always in DOM, transitions opacity */}
       <div
         className={`md:hidden fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity duration-200 no-print ${
           sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'

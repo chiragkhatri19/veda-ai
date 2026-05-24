@@ -1,21 +1,21 @@
 # VedaAI
 
-Most AI tools hand you a list of questions. VedaAI hands you an exam paper — school name on top, sections with instructions, question numbers, marks per question, difficulty split, answer key, diagram space, the works. Print it and walk into class.
+Most AI tools hand you a list of questions. VedaAI hands you an exam paper: school name on top, sections with instructions, question numbers, marks per question, difficulty split, answer key, diagram space, the works. Print it and walk into class.
 
 Built for Indian school teachers. CBSE and ICSE curriculum. Under two minutes.
 
-**Live →** https://vedaai-chirag-khatri.vercel.app
-**API health →** https://api-production-eeb3.up.railway.app/api/health
+**Live:** https://vedaai-chirag-khatri.vercel.app
+**API health:** https://api-production-eeb3.up.railway.app/api/health
 
 ---
 
 ## What we did differently
 
-**The output is a paper, not a list.** The prompt includes the full JSON schema the model must return — sections, question types, marks, difficulty, answers, `diagramDescription` for graph questions. The response is validated by `responseParser.ts` (Zod, strict) before a single field touches the database. Garbage output fails fast, the job can be retried, the DB stays clean.
+**The output is a paper, not a list.** The prompt includes the full JSON schema the model must return: sections, question types, marks, difficulty, answers, `diagramDescription` and `diagramData` for graph questions. The response is validated by `responseParser.ts` (Zod, strict) before a single field touches the database. Garbage output fails fast, the job can be retried, the DB stays clean.
 
-**The generation is async by design.** Gemini takes 15–30 seconds on a full paper. Doing that inline blocks your event loop and loses the result if the server restarts mid-request. Instead: the HTTP endpoint returns in under 50ms with a job ID. A BullMQ worker handles the actual LLM call in the background, emitting five Socket.IO progress events as it moves through stages. The client watches a live progress bar and auto-navigates when the paper lands.
+**The generation is async by design.** Gemini takes 15-30 seconds on a full paper. Doing that inline blocks your event loop and loses the result if the server restarts mid-request. Instead: the HTTP endpoint returns in under 50ms with a job ID. A BullMQ worker handles the actual LLM call in the background, emitting five Socket.IO progress events as it moves through stages. The client watches a live progress bar and auto-navigates when the paper lands.
 
-**Diagram questions actually have a diagram space.** When the question type is `diagram_graph`, the AI is explicitly instructed to fill `diagramDescription` with precise axis labels, units, data ranges, or structural parts to draw. The output page renders a dashed-border figure box with that description and a blank drawing area below it. The print version keeps the dashed border.
+**Diagram questions actually have a diagram.** When the question type is `diagram_graph`, Gemini is asked to return a structured `diagramData` object alongside the text description. We get the chart type (line, bar, scatter), axis labels with units, and 5-8 real data points. The paper renders an actual SVG chart inline - no blank boxes. This also prints cleanly without any raster quality loss.
 
 **The prompt ends with `"Start your response with \`{\`".`** This sounds small. It matters. Without it, Gemini wraps its JSON in markdown code fences half the time. The parser strips those anyway, but starting the response with an open brace is a 0ms fix that makes the rest more reliable.
 
@@ -44,17 +44,17 @@ Browser (Next.js 14)
 
 ## What's in the box
 
-**Question paper generator** — six question types (MCQ, short answer, long answer, numerical, diagram/graph, true/false). Configurable count and marks per type. CBSE/ICSE difficulty split: 40% easy, 40% moderate, 20% hard. Optional file upload for reference material (the first 3000 chars land in the prompt). School name, subject, grade, and generated timestamp on every paper.
+**Question paper generator.** Six question types (MCQ, short answer, long answer, numerical, diagram/graph, true/false). Configurable count and marks per type. CBSE/ICSE difficulty split: 40% easy, 40% moderate, 20% hard. Optional file upload for reference material (the first 3000 chars land in the prompt). School name, subject, grade, and generated timestamp on every paper.
 
-**Rubric and marking scheme** — describe an assessment topic, get back a four-level rubric (Excellent, Good, Satisfactory, Needs Work) with up to eight criteria. Same Gemini → Zod → display pipeline, different prompt shape.
+**Rubric and marking scheme.** Describe an assessment topic, get back a four-level rubric (Excellent, Good, Satisfactory, Needs Work) with up to eight criteria. Same Gemini, Zod, display pipeline, different prompt shape.
 
-**My Library** — every completed paper lives here, searchable by title and filterable by subject. Re-download the PDF anytime without regenerating.
+**My Library.** Every completed paper lives here, searchable by title and filterable by subject. Re-download the PDF anytime without regenerating.
 
-**Class Groups** — organise students into named groups with a subject and grade. `groupId` is threaded through types, schema, service, and the creation form.
+**Class Groups.** Organise students into named groups with a subject and grade. `groupId` is threaded through types, schema, service, and the creation form.
 
-**19 unit tests** — `promptBuilder.test.ts` (9 tests) covers total marks, question counts, section labels, reference material truncation, and the JSON-start instruction. `responseParser.test.ts` (10 tests) covers valid input, code-fence stripping, malformed JSON, missing fields, difficulty normalisation (`"Medium"` → `"moderate"`), and null coercion.
+**19 unit tests.** `promptBuilder.test.ts` (9 tests) covers total marks, question counts, section labels, reference material truncation, and the JSON-start instruction. `responseParser.test.ts` (10 tests) covers valid input, code-fence stripping, malformed JSON, missing fields, difficulty normalisation (`"Medium"` to `"moderate"`), and null coercion.
 
-**Seed script** — `pnpm --filter @veda/api seed` drops three realistic demo assignments so reviewers see a populated dashboard.
+**Seed script.** `pnpm --filter @veda/api seed` drops three realistic demo assignments so reviewers see a populated dashboard.
 
 ---
 
@@ -125,23 +125,23 @@ pnpm --filter @veda/api test
 
 ---
 
-## Project structure (short version)
+## Project structure
 
 ```
 veda-ai/
   apps/
     api/src/
-      queues/       worker.ts — the full generation pipeline lives here
+      queues/       worker.ts: the full generation pipeline lives here
       utils/        promptBuilder.ts, responseParser.ts (and their tests)
       services/     ai, assignment, pdf, rubric
       socket/       Socket.IO server + progress emitter
     web/
       app/          one folder per route, loading.tsx skeleton for each
       components/
-        output/     QuestionPaperView, SectionBlock, QuestionItem (diagram box here)
+        output/     QuestionPaperView, SectionBlock, QuestionItem, DiagramChart
         shared/     GenerationScreen (the document-animation loader)
         layout/     Sidebar, MobileDock, NavigationProgress
-      store/        Zustand — assignments, groups, user, notifications
+      store/        Zustand: assignments, groups, user, notifications
   packages/
     shared/         TypeScript types shared between api and web
 ```

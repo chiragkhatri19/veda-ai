@@ -24,7 +24,7 @@ export function useCreateAssignment() {
         throw new Error('Server did not return a valid assignment ID. Please try again.');
       }
       reset();
-      toast.success('Assignment created — generating your paper…');
+      toast.success('Assignment created. Generating your paper...');
       router.push(`/assignments/${assignmentId}`);
     } catch (err) {
       const message = (err as Error).message;

@@ -1,4 +1,5 @@
 import DifficultyBadge from './DifficultyBadge';
+import DiagramChart from './DiagramChart';
 import type { GeneratedQuestion } from '@veda/shared';
 
 interface Props {
@@ -34,17 +35,23 @@ export default function QuestionItem({ question, showAnswer }: Props) {
                 Figure {question.questionNumber}
               </span>
             </div>
-            {question.diagramDescription ? (
+            {question.diagramDescription && (
               <div className="px-3 pt-2 pb-1">
                 <p className="font-serif text-[11px] text-app-text-secondary italic leading-relaxed">
                   {question.diagramDescription}
                 </p>
               </div>
-            ) : null}
-            <div className="mx-3 my-3 h-40 rounded border border-dashed border-app-border dark:border-zinc-700 print:border-gray-300 flex items-center justify-center bg-app-bg/40 print:bg-white">
-              <span className="text-[11px] text-app-text-muted italic select-none print:text-gray-400">
-                [Diagram / Figure space]
-              </span>
+            )}
+            <div className="px-3 py-3">
+              {question.diagramData ? (
+                <DiagramChart diagramData={question.diagramData} />
+              ) : (
+                <div className="h-40 rounded border border-dashed border-app-border dark:border-zinc-700 print:border-gray-300 flex items-center justify-center bg-app-bg/40 print:bg-white">
+                  <span className="text-[11px] text-app-text-muted italic select-none print:text-gray-400">
+                    [Diagram / Figure space]
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         )}

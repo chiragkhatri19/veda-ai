@@ -9,7 +9,7 @@ export default function NavigationProgress() {
   const prevPath = useRef(pathname);
   const hideTimer = useRef<ReturnType<typeof setTimeout>>();
 
-  // Fires the moment any internal link is clicked — before the route loads
+  // Fires on link click, capture phase, so we start before React's handlers
   useEffect(() => {
     function handleLinkClick(e: MouseEvent) {
       const anchor = (e.target as Element).closest('a[href]') as HTMLAnchorElement | null;
@@ -23,7 +23,6 @@ export default function NavigationProgress() {
       }
     }
 
-    // Capture phase so we fire before React's onClick handlers
     document.addEventListener('click', handleLinkClick, true);
     return () => document.removeEventListener('click', handleLinkClick, true);
   }, [pathname]);

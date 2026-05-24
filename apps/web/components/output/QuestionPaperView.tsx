@@ -26,11 +26,9 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
         onRegenerate={onRegenerate}
       />
 
-      {/* Paper card */}
       <div className="bg-white dark:bg-app-surface rounded-[24px] shadow-[0_2px_8px_rgba(16,24,40,0.06),0_8px_28px_rgba(16,24,40,0.10),0_20px_56px_-8px_rgba(16,24,40,0.08)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.22),0_10px_32px_rgba(0,0,0,0.34),0_24px_64px_rgba(0,0,0,0.28)] print:shadow-none print:rounded-none print:bg-white">
         <div className="p-8 sm:p-12 print:p-0 max-w-3xl mx-auto print:max-w-none print:mx-0">
 
-          {/* School / exam header */}
           <div className="text-center pb-6 mb-6 border-b-2 border-app-text-primary/10">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-app-text-muted mb-2">
               Question Paper
@@ -45,7 +43,6 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
             </div>
           </div>
 
-          {/* Time + Marks row */}
           <div className="flex items-center justify-between print:flex-col print:items-start print:gap-1 font-serif text-[12px] font-medium mb-5 pb-4 border-b border-dashed border-app-border">
             <span className="text-app-text-secondary">
               Time Allowed: <span className="font-semibold text-app-text-primary">{paper.timeAllowed}</span>
@@ -113,7 +110,6 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
             </p>
           </div>
 
-          {/* Answer key — hidden on print */}
           <div className="mt-6 no-print">
             <button
               onClick={() => setShowAnswers((p) => !p)}

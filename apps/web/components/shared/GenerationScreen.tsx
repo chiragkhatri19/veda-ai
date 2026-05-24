@@ -4,16 +4,16 @@ import { useEffect, useState } from 'react';
 import { CheckCircle2, XCircle, FileText } from 'lucide-react';
 
 const FUN_FACTS = [
-  "The average teacher spends 3–5 hours crafting a single question paper by hand. VedaAI does it in seconds.",
+  "The average teacher spends 3-5 hours crafting a single question paper by hand. VedaAI does it in seconds.",
   "Students who practise retrieval testing retain up to 50% more information than those who simply re-read notes.",
-  "Bloom's Taxonomy — published in 1956 — remains the global gold standard for designing fair, rigorous assessments.",
+  "Bloom's Taxonomy (published in 1956) remains the global gold standard for designing fair, rigorous assessments.",
   "Multiple choice questions were first used at scale in World War I to screen 1.7 million US Army recruits in just six weeks.",
   "CBSE is one of the world's largest examination bodies, overseeing assessments across more than 27,000 affiliated schools.",
-  "Research shows that varying difficulty — easy, moderate, hard — can improve class average scores by up to 20%.",
-  "India has over 1.5 million schools, serving approximately 260 million students — more than any other country.",
+  "Research shows that mixing difficulty levels (easy, moderate, hard) can improve class average scores by up to 20%.",
+  "India has over 1.5 million schools and roughly 260 million students, more than any other country in the world.",
   "Teachers who use structured rubrics produce grades that are up to 40% more consistent across different evaluators.",
   "Students perform measurably better when they know the marking criteria before the exam begins.",
-  "The word 'examination' comes from the Latin examinare — meaning 'to test the weight or balance of something'.",
+  "The word 'examination' traces back to the Latin examinare, which means to test the weight or balance of something.",
 ];
 
 interface Props {
@@ -35,7 +35,6 @@ function VedaAIMark() {
   );
 }
 
-/* Skeleton line — reuses the skeletonPulse keyframe from globals.css */
 function SkLine({ w, delay, opacity = 1 }: { w: string; delay: number; opacity?: number }) {
   return (
     <div
@@ -50,7 +49,6 @@ function SkLine({ w, delay, opacity = 1 }: { w: string; delay: number; opacity?:
   );
 }
 
-/* The document preview — a question paper being written */
 function DocumentPreview() {
   return (
     <div className="w-[178px] bg-app-surface dark:bg-[rgb(22,22,26)] border border-app-border rounded-xl shadow-card overflow-hidden">
