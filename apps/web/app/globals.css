@@ -186,7 +186,7 @@ html.dark .shell-root {
 }
 
 @media print {
-  /* ── Hide all interactive / overlay chrome ──────────────────────── */
+  /* ── 1. Hide all interactive chrome ─────────────────────────────── */
   .no-print,
   aside,
   header,
@@ -198,11 +198,7 @@ html.dark .shell-root {
     display: none !important;
   }
 
-  /* Suppress every fixed/absolute layer (OS overlays, toasts, modals) */
-  *:not(.question-paper-print):not(.question-paper-print *):not(.rubric-print-area):not(.rubric-print-area *):not(.rubric-print-header):not(.rubric-print-header *) {
-    position: static !important;
-  }
-
+  /* ── 2. Collapse the flex shell into a flat block document ───────── */
   body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
@@ -210,7 +206,6 @@ html.dark .shell-root {
     color: black !important;
   }
 
-  /* Collapse flex shell so content flows as a block document */
   body > div,
   .shell-root {
     display: block !important;
@@ -225,12 +220,15 @@ html.dark .shell-root {
     background: white !important;
   }
 
-  /* ── Question paper ──────────────────────────────────────────────── */
+  /* ── 3. Question paper ───────────────────────────────────────────── */
   .question-paper-print {
     max-width: none !important;
+    width: 100% !important;
     padding: 0 !important;
+    margin: 0 !important;
   }
 
+  /* Strip card decoration */
   .question-paper-print > div {
     background-color: white !important;
     box-shadow: none !important;
@@ -238,32 +236,47 @@ html.dark .shell-root {
     border-radius: 0 !important;
   }
 
+  /*
+   * All text → black, all borders → light gray, all backgrounds → white.
+   * Using white (not transparent) so colour-badge backgrounds don't bleed
+   * on some PDF renderers that treat transparent differently.
+   */
   .question-paper-print * {
     color: black !important;
     border-color: #d1d5db !important;
-    background-color: transparent !important;
+    background-color: white !important;
   }
 
-  /* Section header: force centre-align even when parent margin resets */
+  /* Re-apply dashed style where used */
+  .question-paper-print .border-dashed {
+    border-style: dashed !important;
+  }
+
+  /* Prevent individual questions from splitting across pages */
+  .question-paper-print .print\:break-inside-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Section header: centred */
   .question-paper-print .section-block-header {
     text-align: center !important;
     display: block !important;
     width: 100% !important;
   }
 
-  /* Section divider: collapse the double-line into a single centred rule */
+  /* Section divider: single rule, drop the decorative double-line */
   .question-paper-print .section-divider {
     display: block !important;
-    text-align: center !important;
     border-top: 1px solid #9ca3af !important;
-    margin: 24px 0 !important;
+    margin: 20px 0 !important;
   }
 
   .question-paper-print .section-divider > * {
     display: none !important;
   }
 
-  /* ── Rubric table ────────────────────────────────────────────────── */
+  /* ── 4. Rubric table ─────────────────────────────────────────────── */
   .rubric-print-area {
     overflow: visible !important;
     border-radius: 0 !important;

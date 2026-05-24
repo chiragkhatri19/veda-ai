@@ -8,7 +8,7 @@ interface Props {
 
 export default function QuestionItem({ question, showAnswer }: Props) {
   return (
-    <div className="flex gap-3.5">
+    <div className="flex gap-3.5 print:break-inside-avoid">
       <span className="font-serif text-[14px] font-bold text-app-text-primary min-w-[24px] pt-px shrink-0 tabular-nums">
         {question.questionNumber}.
       </span>
@@ -19,8 +19,8 @@ export default function QuestionItem({ question, showAnswer }: Props) {
           </p>
           <div className="flex items-center gap-2 shrink-0 pt-0.5">
             <DifficultyBadge difficulty={question.difficulty} />
-            <span className="text-[11px] font-semibold text-app-text-secondary whitespace-nowrap bg-app-surface-2 border border-app-border px-2 py-0.5 rounded">
-              {question.marks} {question.marks === 1 ? 'mark' : 'marks'}
+            <span className="text-[11px] font-semibold text-app-text-secondary whitespace-nowrap bg-app-surface-2 border border-app-border px-2 py-0.5 rounded print:bg-white print:border-gray-400 print:text-black">
+              [{question.marks} {question.marks === 1 ? 'mark' : 'marks'}]
             </span>
           </div>
         </div>

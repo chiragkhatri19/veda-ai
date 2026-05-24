@@ -11,7 +11,7 @@ const CONFIG = {
 export default function DifficultyBadge({ difficulty }: Props) {
   const { label, className } = CONFIG[difficulty] ?? CONFIG.moderate;
   return (
-    <span className={`inline-block text-[10px] font-semibold px-1.5 py-0.5 rounded border uppercase tracking-wide ${className}`}>
+    <span className={`inline-block text-[10px] font-semibold px-1.5 py-0.5 rounded border uppercase tracking-wide print:hidden ${className}`}>
       {label}
     </span>
   );

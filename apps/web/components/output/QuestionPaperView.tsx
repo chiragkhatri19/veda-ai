@@ -18,7 +18,7 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
   const gradeLabel = paper.grade || assignment.grade;
 
   return (
-    <div className="px-6 py-6 max-w-4xl mx-auto print:px-0 print:py-0 print:max-w-none question-paper-print">
+    <div className="px-6 py-6 max-w-4xl mx-auto print:px-0 print:py-0 print:mx-0 print:max-w-none question-paper-print">
       <ActionBar
         assignmentId={assignment.id}
         assignmentTitle={assignment.title}
