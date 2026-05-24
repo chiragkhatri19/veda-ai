@@ -11,7 +11,6 @@ import {
 import { useAssignmentStore } from '@/store/assignmentStore';
 import { useUserStore } from '@/store/userStore';
 import { getSocket } from '@/lib/socket';
-import ThemeToggle from './ThemeToggle';
 
 export const SIDEBAR_COLLAPSED = 60;
 export const SIDEBAR_EXPANDED_MIN = 180;
@@ -113,7 +112,6 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
       </nav>
 
       <div className="flex flex-col items-center gap-1.5 w-full px-2 pt-3">
-        <ThemeToggle />
         <Link
           href="/settings"
           title="Settings"
@@ -236,13 +234,6 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
           <Settings className={`w-[15px] h-[15px] shrink-0 ${pathname === '/settings' ? 'text-brand-orange' : ''}`} />
           {showLabels && <span>Settings</span>}
         </Link>
-
-        {showLabels && (
-          <div className="flex items-center gap-2.5 px-3 py-2">
-            <span className="text-[12.5px] font-medium text-app-text-secondary flex-1">Theme</span>
-            <ThemeToggle />
-          </div>
-        )}
 
         <Link
           href="/settings"
