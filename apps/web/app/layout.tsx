@@ -11,6 +11,11 @@ const serif = Lora({ subsets: ['latin'], display: 'swap', variable: '--font-seri
 export const metadata: Metadata = {
   title: 'VedaAI - Assessment Engine',
   description: 'AI-powered engine for generating print-ready, curriculum-aligned assessments at scale',
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
