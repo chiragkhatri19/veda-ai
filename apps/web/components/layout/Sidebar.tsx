@@ -26,9 +26,9 @@ const NAV_ITEMS = [
   { href: '/library',     label: 'My Library',          icon: Library         },
 ];
 
-function VedaAILogo() {
+function VedaAILogo({ size = 32 }: { size?: number }) {
   return (
-    <Image src="/logo.png" alt="VedaAI" width={32} height={32} className="rounded-[9px]" priority />
+    <Image src="/logo.png" alt="VedaAI" width={size} height={size} className="rounded-[9px] block shrink-0" priority />
   );
 }
 
@@ -64,7 +64,7 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
   return (
     <div className="h-full w-full bg-transparent flex flex-col items-center pt-5 pb-4 gap-1">
       <div className="flex flex-col items-center gap-3 mb-5">
-        <VedaAILogo />
+        <VedaAILogo size={36} />
         {onExpand && (
           <button
             onClick={onExpand}
@@ -146,11 +146,11 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
   return (
     <div className="h-full w-full bg-transparent flex flex-col overflow-hidden">
 
-      <div className="px-5 pt-6 pb-5 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <VedaAILogo />
+      <div className="px-5 pt-5 pb-5 flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-3 min-w-0">
+          <VedaAILogo size={36} />
           {showLabels && (
-            <span className="text-[15px] font-bold text-app-text-primary tracking-tight truncate">VedaAI</span>
+            <span className="text-[17px] font-extrabold text-app-text-primary tracking-tight leading-none truncate">VedaAI</span>
           )}
         </div>
         <div className="flex items-center gap-0.5 shrink-0">

@@ -137,6 +137,7 @@ export default function Step1_UploadDetails() {
   }
 
   const onSubmit = async (data: FormValues) => {
+    if (step !== 2) return;
     await submitAssignment({
       title:                  data.title,
       subject:                data.subject,
@@ -150,7 +151,7 @@ export default function Step1_UploadDetails() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={(e) => e.preventDefault()}>
       {/* Step indicator */}
       <div className="mb-6 flex items-center gap-0">
         <div className="flex items-center gap-2 shrink-0">
@@ -492,8 +493,9 @@ export default function Step1_UploadDetails() {
           </button>
         ) : (
           <button
-            type="submit"
+            type="button"
             disabled={isSubmitting}
+            onClick={handleSubmit(onSubmit)}
             className="inline-flex items-center gap-2 px-6 py-2.5 text-[13px] font-semibold text-white bg-brand-dark rounded-full hover:opacity-90 active:scale-[0.97] active:opacity-80 disabled:opacity-60 transition-[opacity,transform] duration-150 shadow-sm"
           >
             {isSubmitting ? 'Generating...' : 'Generate Paper'}
