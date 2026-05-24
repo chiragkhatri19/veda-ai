@@ -41,7 +41,7 @@ export default function NavigationProgress() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-x-0 top-0 z-[200] h-[2px] overflow-hidden"
+      className="no-print pointer-events-none fixed inset-x-0 top-0 z-[200] h-[2px] overflow-hidden"
     >
       <div
         className={`h-full w-1/3 rounded-full bg-brand-orange transition-opacity duration-300 ${

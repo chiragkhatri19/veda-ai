@@ -46,7 +46,7 @@ export default function QuestionPaperView({ assignment, onRegenerate }: Props) {
           </div>
 
           {/* Time + Marks row */}
-          <div className="flex items-center justify-between font-serif text-[12px] font-medium mb-5 pb-4 border-b border-dashed border-app-border">
+          <div className="flex items-center justify-between print:flex-col print:items-start print:gap-1 font-serif text-[12px] font-medium mb-5 pb-4 border-b border-dashed border-app-border">
             <span className="text-app-text-secondary">
               Time Allowed: <span className="font-semibold text-app-text-primary">{paper.timeAllowed}</span>
             </span>

@@ -203,6 +203,16 @@ html.dark .shell-root {
     display: none !important;
   }
 
+  /* Hide any portal / overlay appended directly to <body> (Radix, toasts, etc.) */
+  body > *:not(.shell-root):not(style):not(script) {
+    display: none !important;
+  }
+
+  /* Force Tailwind's print:hidden to win against the * { color/bg } rule above */
+  .print\:hidden {
+    display: none !important;
+  }
+
   /* ── 2. Collapse the flex shell into a flat block document ───────── */
   body {
     -webkit-print-color-adjust: exact !important;

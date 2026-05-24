@@ -10,7 +10,7 @@ export default function SectionBlock({ section, showAnswers }: Props) {
   return (
     <div>
       <div className="text-center mb-6 section-block-header">
-        <h3 className="font-serif text-[15px] font-bold text-app-text-primary uppercase tracking-widest underline underline-offset-4 decoration-app-border">
+        <h3 className="font-serif text-[15px] font-bold text-app-text-primary uppercase tracking-wide print:tracking-normal underline underline-offset-4 decoration-app-border">
           Section {section.label}: {section.title}
         </h3>
         <p className="font-serif text-[13px] italic text-app-text-secondary mt-2 leading-relaxed">
