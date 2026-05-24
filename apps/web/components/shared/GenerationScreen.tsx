@@ -28,7 +28,7 @@ interface Props {
 }
 
 function VedaAIMark() {
-  return <Image src="/logo.png" alt="VedaAI" width={32} height={32} className="rounded-[9px]" />;
+  return <Image src="/logo.png" alt="VedaAI" width={64} height={64} className="rounded-[9px]" />;
 }
 
 function SkLine({ w, delay, opacity = 1 }: { w: string; delay: number; opacity?: number }) {

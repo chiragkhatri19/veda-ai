@@ -64,7 +64,7 @@ function CollapsedSidebar({ onExpand }: { onExpand?: () => void }) {
   return (
     <div className="h-full w-full bg-transparent flex flex-col items-center pt-5 pb-4 gap-1">
       <div className="flex flex-col items-center gap-3 mb-5">
-        <VedaAILogo size={36} />
+        <VedaAILogo size={72} />
         {onExpand && (
           <button
             onClick={onExpand}
@@ -149,7 +149,7 @@ function ExpandedSidebar({ onClose, width, onCollapse }: { onClose?: () => void;
       <div className="px-6 pt-5 pb-5 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3 min-w-0">
           <div className="mt-3 ml-1 shrink-0">
-            <VedaAILogo size={36} />
+            <VedaAILogo size={72} />
           </div>
           {showLabels && (
             <span className="text-[17px] font-extrabold text-app-text-primary tracking-tight leading-none truncate">VedaAI</span>

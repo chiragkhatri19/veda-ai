@@ -96,7 +96,7 @@ export default function TopBar({ onMenuToggle }: Props) {
             </>
           ) : (
             <>
-              <Image src="/logo.png" alt="VedaAI" width={28} height={28} className="rounded-[8px]" priority />
+              <Image src="/logo.png" alt="VedaAI" width={56} height={56} className="rounded-[8px]" priority />
               <span className="text-[15px] font-bold text-app-text-primary tracking-tight">VedaAI</span>
             </>
           )}
