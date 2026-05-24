@@ -17,51 +17,44 @@ function isActive(pathname: string, href: string) {
   return pathname.startsWith(href);
 }
 
-export default function MobileDock() {
+interface Props {
+  sidebarOpen?: boolean;
+}
+
+export default function MobileDock({ sidebarOpen }: Props) {
   const pathname = usePathname();
 
   return (
-    <div className="md:hidden fixed bottom-4 left-3 right-3 z-50 no-print">
-      <nav
-        className="
-          bg-[#0a0a0a] dark:bg-white
-          rounded-[26px]
-          flex items-center
-          px-2 py-2
-          shadow-[0_2px_6px_rgba(0,0,0,0.35),0_8px_24px_rgba(0,0,0,0.40),0_22px_56px_rgba(0,0,0,0.36),0_44px_100px_rgba(0,0,0,0.30)]
-          dark:shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_4px_14px_rgba(0,0,0,0.12),0_18px_52px_rgba(0,0,0,0.16),0_40px_96px_rgba(0,0,0,0.12)]
-        "
-      >
+    <div
+      className={`md:hidden fixed bottom-4 left-4 right-4 z-50 no-print transition-[opacity,transform] duration-200 ${
+        sidebarOpen ? 'opacity-0 pointer-events-none translate-y-2' : 'opacity-100 translate-y-0'
+      }`}
+    >
+      <nav className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-zinc-200/70 dark:border-zinc-700/50 rounded-[22px] flex items-center px-1.5 py-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.08),0_12px_32px_rgba(0,0,0,0.12),0_24px_64px_rgba(0,0,0,0.10)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.30),0_12px_32px_rgba(0,0,0,0.40),0_24px_64px_rgba(0,0,0,0.35)]">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
           return (
             <Link
               key={href}
               href={href}
-              className="flex-1 flex flex-col items-center active:opacity-60 transition-opacity duration-100"
+              className="flex-1 flex flex-col items-center active:scale-95 transition-transform duration-100"
             >
-              {/* Active: white pill chip. Inactive: transparent */}
               <div
-                className={`
-                  w-full flex flex-col items-center gap-[5px] py-2.5 rounded-[18px]
-                  transition-all duration-200
-                  ${active
-                    ? 'bg-white dark:bg-zinc-200 shadow-[0_1px_4px_rgba(0,0,0,0.10)]'
-                    : 'bg-transparent'
-                  }
-                `}
+                className={`w-full flex flex-col items-center gap-[4px] py-2.5 px-1 rounded-[16px] transition-colors duration-150 ${
+                  active
+                    ? 'bg-brand-orange/10 dark:bg-brand-orange/15'
+                    : ''
+                }`}
               >
                 <Icon
-                  className={`w-[20px] h-[20px] ${
-                    active ? 'text-zinc-900 dark:text-zinc-900' : 'text-zinc-500 dark:text-zinc-400'
+                  className={`w-[19px] h-[19px] transition-colors duration-150 ${
+                    active ? 'text-brand-orange' : 'text-zinc-400 dark:text-zinc-500'
                   }`}
                   strokeWidth={active ? 2.5 : 1.8}
                 />
                 <span
-                  className={`text-[10px] leading-none ${
-                    active
-                      ? 'text-zinc-900 dark:text-zinc-900 font-semibold'
-                      : 'text-zinc-500 dark:text-zinc-400 font-medium'
+                  className={`text-[10px] leading-none font-medium transition-colors duration-150 ${
+                    active ? 'text-brand-orange' : 'text-zinc-400 dark:text-zinc-500'
                   }`}
                 >
                   {label}

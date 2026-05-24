@@ -344,7 +344,7 @@ export default function Sidebar({ open, onClose, width, onResize }: SidebarProps
       {/* ── Mobile drawer ───────────────────────────────────────────────── */}
       <div
         className={`md:hidden fixed inset-y-0 left-0 z-40 bg-white dark:bg-app-surface rounded-3xl my-3 ml-3 transition-transform duration-200 ease-in-out shadow-[0_4px_12px_rgba(0,0,0,0.08),0_12px_36px_rgba(0,0,0,0.12),0_28px_72px_rgba(0,0,0,0.10)] dark:shadow-[6px_0_14px_rgba(0,0,0,0.30),12px_0_40px_rgba(0,0,0,0.42),20px_0_72px_rgba(0,0,0,0.36)] no-print ${
-          open ? 'translate-x-0' : '-translate-x-full'
+          open ? 'translate-x-0' : '-translate-x-[calc(100%+0.75rem)]'
         }`}
         style={{ width: SIDEBAR_DEFAULT }}
         onTouchStart={(e) => {

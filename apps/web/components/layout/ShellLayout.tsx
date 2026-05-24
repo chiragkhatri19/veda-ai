@@ -53,7 +53,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
         </main>
       </div>
 
-      <MobileDock />
+      <MobileDock sidebarOpen={sidebarOpen} />
     </div>
   );
 }
