@@ -6,19 +6,43 @@ import type { IAssignment } from '../models/assignment.model.js';
 
 const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
 
+const diagramDataPointSchema: Schema = {
+  type: SchemaType.OBJECT,
+  properties: {
+    name:  { type: SchemaType.STRING, description: 'X-axis tick label' },
+    value: { type: SchemaType.NUMBER, description: 'Y-axis numeric value' },
+  },
+  required: ['name', 'value'],
+};
+
+const diagramDataSchema: Schema = {
+  type: SchemaType.OBJECT,
+  nullable: true,
+  properties: {
+    type:   { type: SchemaType.STRING, enum: ['line', 'bar', 'scatter'] },
+    title:  { type: SchemaType.STRING, nullable: true },
+    xLabel: { type: SchemaType.STRING, nullable: true },
+    yLabel: { type: SchemaType.STRING, nullable: true },
+    data:   { type: SchemaType.ARRAY, items: diagramDataPointSchema },
+  },
+  required: ['type', 'data'],
+};
+
 const questionSchema: Schema = {
   type: SchemaType.OBJECT,
   properties: {
-    id: { type: SchemaType.STRING, description: 'Unique identifier for the question' },
-    questionNumber: { type: SchemaType.INTEGER, description: '1-based sequential index' },
-    text: { type: SchemaType.STRING, description: 'The question text' },
-    type: { type: SchemaType.STRING, description: 'E.g., MCQ, Short Answer, True/False, Essay' },
-    difficulty: { type: SchemaType.STRING, enum: ['easy', 'moderate', 'hard'] },
-    marks: { type: SchemaType.INTEGER, description: 'Marks assigned to this question' },
-    answer: { type: SchemaType.STRING, description: 'Correct answer or marking guide' },
-    hint: { type: SchemaType.STRING, description: 'Optional student hint; empty string if none' },
+    id:                   { type: SchemaType.STRING },
+    questionNumber:       { type: SchemaType.INTEGER },
+    text:                 { type: SchemaType.STRING },
+    type:                 { type: SchemaType.STRING },
+    difficulty:           { type: SchemaType.STRING, enum: ['easy', 'moderate', 'hard'] },
+    marks:                { type: SchemaType.INTEGER },
+    answer:               { type: SchemaType.STRING },
+    hint:                 { type: SchemaType.STRING, nullable: true },
+    diagramDescription:   { type: SchemaType.STRING, nullable: true, description: 'Plain-English description of the figure. Null for non-diagram questions.' },
+    diagramData:          diagramDataSchema,
   },
-  required: ['id', 'questionNumber', 'text', 'type', 'difficulty', 'marks', 'answer'],
+  required: ['id', 'questionNumber', 'text', 'type', 'difficulty', 'marks', 'answer', 'diagramDescription', 'diagramData'],
 };
 
 const sectionSchema: Schema = {
