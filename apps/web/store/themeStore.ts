@@ -11,8 +11,8 @@ interface ThemeStore {
 }
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'light';
-  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  // Always start as 'light' to match SSR. ThemeToggle syncs from DOM after mount.
+  return 'light';
 }
 
 function applyTheme(theme: Theme) {

@@ -104,6 +104,7 @@ export const useNotificationStore = create<NotificationState & NotificationActio
     })),
     {
       name: 'vedaai-notifications',
+      skipHydration: true,
       partialize: (state) => ({ notifications: state.notifications }),
     },
   ),

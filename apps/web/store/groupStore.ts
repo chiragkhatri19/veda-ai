@@ -53,12 +53,8 @@ export const useGroupStore = create<GroupStore>()(
     }),
     {
       name: 'veda-groups',
-      storage: createJSONStorage(() => {
-        if (typeof window === 'undefined') {
-          return { getItem: () => null, setItem: () => {}, removeItem: () => {} };
-        }
-        return localStorage;
-      }),
+      skipHydration: true,
+      storage: createJSONStorage(() => localStorage),
     },
   ),
 );

@@ -4,12 +4,20 @@ import { useState, useEffect, useCallback } from 'react';
 import Sidebar, { SIDEBAR_DEFAULT } from './Sidebar';
 import TopBar from './TopBar';
 import NavigationProgress from './NavigationProgress';
+import { useUserStore } from '@/store/userStore';
+import { useNotificationStore } from '@/store/notificationStore';
+import { useGroupStore } from '@/store/groupStore';
 
 export default function ShellLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(SIDEBAR_DEFAULT);
 
   useEffect(() => {
+    // Rehydrate persist stores after React hydration completes.
+    useUserStore.persist.rehydrate();
+    useNotificationStore.persist.rehydrate();
+    useGroupStore.persist.rehydrate();
+
     const stored = localStorage.getItem('vedaai-sidebar-width') ?? localStorage.getItem('caliber-sidebar-width') ?? localStorage.getItem('veda-sidebar-width');
     if (stored) setSidebarWidth(Number(stored));
   }, []);
