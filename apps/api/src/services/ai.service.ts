@@ -15,7 +15,7 @@ const diagramDataPointSchema: Schema = {
   required: ['name', 'value'],
 };
 
-const diagramDataSchema: Schema = {
+const diagramDataSchema = {
   type: SchemaType.OBJECT,
   nullable: true,
   properties: {
@@ -26,9 +26,10 @@ const diagramDataSchema: Schema = {
     data:   { type: SchemaType.ARRAY, items: diagramDataPointSchema },
   },
   required: ['type', 'data'],
-};
+  propertyOrdering: ['type', 'title', 'xLabel', 'yLabel', 'data'],
+} as Schema;
 
-const questionSchema: Schema = {
+const questionSchema = {
   type: SchemaType.OBJECT,
   properties: {
     id:                   { type: SchemaType.STRING },
@@ -43,7 +44,8 @@ const questionSchema: Schema = {
     diagramData:          diagramDataSchema,
   },
   required: ['id', 'questionNumber', 'text', 'type', 'difficulty', 'marks', 'answer', 'diagramDescription', 'diagramData'],
-};
+  propertyOrdering: ['id', 'questionNumber', 'text', 'type', 'difficulty', 'marks', 'answer', 'hint', 'diagramDescription', 'diagramData'],
+} as Schema;
 
 const sectionSchema: Schema = {
   type: SchemaType.OBJECT,

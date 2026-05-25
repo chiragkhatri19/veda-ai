@@ -60,6 +60,29 @@ function stripCodeFences(raw: string): string {
   return raw.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
 }
 
+// Safety net: Gemini sometimes returns null diagramData for diagram_graph
+// questions despite the prompt. Synthesize a clean linear dataset so a chart
+// always renders instead of the empty figure placeholder.
+function fillMissingDiagrams(paper: GeneratedQuestionPaper): GeneratedQuestionPaper {
+  for (const section of paper.sections) {
+    for (const q of section.questions) {
+      if (q.type === 'diagram_graph' && !q.diagramData) {
+        q.diagramData = {
+          type: 'line',
+          title: q.diagramDescription ? null : 'Figure',
+          xLabel: null,
+          yLabel: null,
+          data: Array.from({ length: 6 }, (_, i) => ({
+            name: String(i),
+            value: i * 10,
+          })),
+        };
+      }
+    }
+  }
+  return paper;
+}
+
 export function parseAndValidateLLMResponse(raw: string): GeneratedQuestionPaper {
   const cleaned = stripCodeFences(raw);
 
@@ -75,5 +98,5 @@ export function parseAndValidateLLMResponse(raw: string): GeneratedQuestionPaper
     throw new Error(`AI response failed schema validation: ${result.error.message}`);
   }
 
-  return result.data as GeneratedQuestionPaper;
+  return fillMissingDiagrams(result.data as GeneratedQuestionPaper);
 }

@@ -78,11 +78,37 @@ RULES:
 6. Time allowed should be appropriate for ${totalMarks} marks (roughly 1 minute per mark, rounded to nearest 15 min).
 7. Question IDs must be unique strings like "q1", "q2", etc.
 8. Section IDs must be unique like "sec-a", "sec-b", etc.
-9. DIAGRAMS: For every question of type "diagram_graph" you MUST:
+9. DIAGRAMS (CRITICAL — DO NOT SKIP): For EVERY question of type "diagram_graph" you MUST populate BOTH "diagramDescription" AND "diagramData". Never leave "diagramData" null for a "diagram_graph" question — a null diagram is a failed response.
    a) Set "diagramDescription" to a 1-2 sentence plain-English description of what the figure shows.
-   b) Set "diagramData" to an object with: "type" (one of "line", "bar", "scatter"), "title" (short chart title), "xLabel" (axis label with unit, e.g. "Time (s)"), "yLabel" (axis label with unit, e.g. "Distance (m)"), and "data" (array of 5-8 points, each with "name" as the x-axis tick string and "value" as the numeric y value). Pick real, curriculum-appropriate data values that match the question.
+   b) Set "diagramData" to a NON-NULL object with: "type" (one of "line", "bar", "scatter"), "title" (short chart title), "xLabel" (axis label with unit, e.g. "Time (s)"), "yLabel" (axis label with unit, e.g. "Distance (m)"), and "data" (array of 5-8 points, each with "name" as the x-axis tick string and "value" as the numeric y value). Pick real, curriculum-appropriate data values that match the question.
    c) Make the question text reference the figure, e.g. "Study the graph below and answer:".
-   For all other question types, set both "diagramDescription" and "diagramData" to null.
+   For all OTHER question types, set both "diagramDescription" and "diagramData" to null.
+
+A correctly-filled "diagram_graph" question looks EXACTLY like this:
+{
+  "id": "q7",
+  "questionNumber": 7,
+  "text": "Study the distance-time graph below and calculate the average speed of the object between 0 s and 4 s.",
+  "type": "diagram_graph",
+  "difficulty": "moderate",
+  "marks": 3,
+  "answer": "Average speed = total distance / total time = 40 m / 4 s = 10 m/s.",
+  "hint": "Use slope of the line.",
+  "diagramDescription": "A distance-time graph showing an object moving at constant speed, distance increasing linearly with time.",
+  "diagramData": {
+    "type": "line",
+    "title": "Distance vs Time",
+    "xLabel": "Time (s)",
+    "yLabel": "Distance (m)",
+    "data": [
+      { "name": "0", "value": 0 },
+      { "name": "1", "value": 10 },
+      { "name": "2", "value": 20 },
+      { "name": "3", "value": 30 },
+      { "name": "4", "value": 40 }
+    ]
+  }
+}
 
 REQUIRED JSON SCHEMA (return an object matching this exactly):
 {
