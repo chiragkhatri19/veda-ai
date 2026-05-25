@@ -8,7 +8,7 @@ dist/
 out/
 *.tsbuildinfo
 
-# Environment files — never commit secrets
+# Environment files - never commit secrets
 .env
 .env.local
 .env.*.local
@@ -58,8 +58,15 @@ CALIBER_CURRENT_STATUS_DELTA.md
 CALIBER_FINAL_VERIFICATION_REPORT.md
 ved_ai_production_readiness.md
 
-# Screenshots (but allow app assets in public/)
+# Screenshots (but allow app assets in public/ and README docs)
 *.png
 !apps/web/public/*.png
+!docs/*.png
 
 .vercel
+
+# Local design scratch (mockups + loose logo sources, not part of the app)
+/*.jsx
+/logo*.svg
+/logo*.png
+micro-patch-integration.md

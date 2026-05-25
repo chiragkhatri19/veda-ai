@@ -1,60 +1,108 @@
 # VedaAI
 
-Most AI tools hand you a list of questions. VedaAI hands you an exam paper: school name on top, sections with instructions, question numbers, marks per question, difficulty split, answer key, diagram space, the works. Print it and walk into class.
+Most AI tools hand you a list of questions. VedaAI hands you an exam paper: school name on top, sections with instructions, question numbers, marks per question, a difficulty split, an answer key, and real inline diagrams. Print it and walk into class.
 
-Built for Indian school teachers. CBSE and ICSE curriculum. Under two minutes.
+Built for Indian school teachers, tuned for CBSE and ICSE, and it gets there in under two minutes.
 
-**Live:** https://vedaai-chirag-khatri.vercel.app
+**Live:** https://veda-ai-tawny.vercel.app
 **API health:** https://api-production-eeb3.up.railway.app/api/health
 
 ---
 
-## What we did differently
+## Screenshots
 
-**The output is a paper, not a list.** The prompt includes the full JSON schema the model must return: sections, question types, marks, difficulty, answers, `diagramDescription` and `diagramData` for graph questions. The response is validated by `responseParser.ts` (Zod, strict) before a single field touches the database. Garbage output fails fast, the job can be retried, the DB stays clean.
+| Generated paper | Create flow |
+|---|---|
+| ![Generated question paper](docs/generated-paper.png) | ![Create assignment form](docs/create-form.png) |
 
-**The generation is async by design.** Gemini takes 15-30 seconds on a full paper. Doing that inline blocks your event loop and loses the result if the server restarts mid-request. Instead: the HTTP endpoint returns in under 50ms with a job ID. A BullMQ worker handles the actual LLM call in the background, emitting five Socket.IO progress events as it moves through stages. The client watches a live progress bar and auto-navigates when the paper lands.
+| Dashboard | Upload reference material |
+|---|---|
+| ![Dashboard](docs/dashboard.png) | ![Upload material](docs/upload-material.png) |
 
-**Diagram questions actually have a diagram.** When the question type is `diagram_graph`, Gemini is asked to return a structured `diagramData` object alongside the text description. We get the chart type (line, bar, scatter), axis labels with units, and 5-8 real data points. The paper renders an actual SVG chart inline - no blank boxes. This also prints cleanly without any raster quality loss.
+---
 
-**The prompt ends with `"Start your response with \`{\`".`** This sounds small. It matters. Without it, Gemini wraps its JSON in markdown code fences half the time. The parser strips those anyway, but starting the response with an open brace is a 0ms fix that makes the rest more reliable.
+## What makes it different
+
+**The output is a paper, not a list.** The prompt carries the full JSON schema the model must return: sections, question types, marks, difficulty, answers, plus `diagramDescription` and `diagramData` for graph questions. Every response is validated by `responseParser.ts` (Zod, strict) before a single field touches the database. Bad output fails fast, the job can be retried, and the database stays clean.
+
+**Generation is async by design.** Gemini takes 15 to 30 seconds on a full paper. Running that inline would block the event loop and lose the result if the server restarted mid request. Instead the HTTP endpoint returns in under 50ms with a job ID, a BullMQ worker runs the LLM call in the background, and it emits Socket.IO progress events as it moves through stages. The client watches a live progress bar and navigates automatically when the paper lands.
+
+**Diagram questions actually have a diagram.** When the question type is `diagram_graph`, Gemini returns a structured `diagramData` object next to the text: chart type (line, bar, scatter), axis labels with units, and 5 to 8 real data points. The prompt carries a fully worked example so the model fills it reliably, and `responseParser.ts` has a safety net: if a graph question ever comes back without data, it synthesises a clean fallback dataset so the paper never renders a blank box. The chart is inline SVG, so it prints crisp with no raster quality loss.
+
+**The prompt ends with "Start your response with `{`".** Small instruction, real payoff. Without it, Gemini wraps its JSON in markdown fences half the time. The parser strips fences anyway, but forcing an open brace makes the whole response more reliable at zero cost.
 
 ---
 
 ## How generation works, step by step
 
-1. Teacher fills in the form. Subject, grade, due date, question types with counts and marks per question, optional reference material or extra instructions.
+1. The teacher fills in the form: subject, grade, due date, question types with counts and marks each, plus optional reference material or extra instructions.
 
-2. `POST /api/assignments` creates a record (`jobStatus: 'queued'`), adds the job to BullMQ, and returns the ID. HTTP response is back before a token is generated.
+2. `POST /api/assignments` creates a record (`jobStatus: 'queued'`), adds the job to BullMQ, and returns the ID. The HTTP response is back before a token is generated.
 
-3. The worker picks it up. It emits progress over Socket.IO at 10%, 25%, 70%, 90%, and 100% as it: validates input, builds the prompt, calls Gemini, parses and validates the response, and writes the paper to MongoDB.
+3. The worker picks it up and emits progress over Socket.IO at 10, 25, 70, 90, and 100 percent as it validates input, builds the prompt, calls Gemini, parses and validates the response, and writes the paper to MongoDB.
 
-4. The client is watching. `useJobProgress` listens via Socket.IO and drives the progress bar in real time. On completion it re-fetches the assignment and the output page renders.
+4. The client is watching. `useJobProgress` listens via Socket.IO and drives the progress bar in real time. On completion it refetches the assignment and the output page renders.
 
 ```
-Browser (Next.js 14)
-  REST via Axios        Express API      MongoDB Atlas
-  Socket.IO client      Socket.IO server
-                                 BullMQ Worker
-                                 Google Gemini (gemini-2.5-flash)
-                                 Redis (Upstash, job queue)
+Browser (Next.js 14)                Express API              Data
+  REST via Axios          ────────▶   Express + routes  ───▶  MongoDB Atlas
+  Socket.IO client        ◀────────   Socket.IO server
+                                       BullMQ worker      ───▶  Google Gemini (gemini-2.5-flash)
+                                       Redis (Upstash)         job queue + progress
 ```
 
 ---
 
 ## What's in the box
 
-**Question paper generator.** Six question types (MCQ, short answer, long answer, numerical, diagram/graph, true/false). Configurable count and marks per type. CBSE/ICSE difficulty split: 40% easy, 40% moderate, 20% hard. Optional file upload for reference material (the first 3000 chars land in the prompt). School name, subject, grade, and generated timestamp on every paper.
+**Question paper generator.** Six question types (MCQ, short answer, long answer, numerical, diagram or graph, true or false). Configurable count and marks per type. CBSE and ICSE difficulty split of roughly 40 percent easy, 40 percent moderate, 20 percent hard. Optional file upload for reference material (the first 3000 characters land in the prompt). School name, subject, grade, and a generated timestamp on every paper.
 
-**Rubric and marking scheme.** Describe an assessment topic, get back a four-level rubric (Excellent, Good, Satisfactory, Needs Work) with up to eight criteria. Same Gemini, Zod, display pipeline, different prompt shape.
+**Rubric and marking scheme.** Describe an assessment topic and get back a four level rubric (Excellent, Good, Satisfactory, Needs Work) with up to eight criteria. Same Gemini, Zod, render pipeline, different prompt shape.
 
-**My Library.** Every completed paper lives here, searchable by title and filterable by subject. Re-download the PDF anytime without regenerating.
+**My Library.** Every completed paper lives here, searchable by title and filterable by subject. Redownload the PDF anytime without regenerating.
 
-**Class Groups.** Organise students into named groups with a subject and grade. `groupId` is threaded through types, schema, service, and the creation form.
+**Class Groups.** Organise students into named groups with a subject and grade. `groupId` is threaded through the types, schema, service, and the creation form.
 
-**19 unit tests.** `promptBuilder.test.ts` (9 tests) covers total marks, question counts, section labels, reference material truncation, and the JSON-start instruction. `responseParser.test.ts` (10 tests) covers valid input, code-fence stripping, malformed JSON, missing fields, difficulty normalisation (`"Medium"` to `"moderate"`), and null coercion.
+**19 unit tests.** `promptBuilder.test.ts` (9 tests) covers total marks, question counts, section labels, reference material truncation, and the JSON start instruction. `responseParser.test.ts` (10 tests) covers valid input, code fence stripping, malformed JSON, missing fields, difficulty normalisation ("Medium" to "moderate"), and null coercion.
 
 **Seed script.** `pnpm --filter @veda/api seed` drops three realistic demo assignments so reviewers see a populated dashboard.
+
+---
+
+## Monorepo layout
+
+This is a pnpm workspace. Two deployable apps and one shared package, wired together with the `workspace:*` protocol so types stay in sync across the stack.
+
+```
+veda-ai/
+  apps/
+    api/                  Express + TypeScript backend (deploys to Railway)
+      src/
+        queues/           worker.ts: the full generation pipeline
+        utils/            promptBuilder.ts, responseParser.ts (and their tests)
+        services/         ai, assignment, pdf, rubric
+        socket/           Socket.IO server + progress emitter
+        models/           Mongoose schemas
+    web/                  Next.js 14 App Router frontend (deploys to Vercel)
+      app/                one folder per route, with a loading.tsx skeleton
+      components/
+        output/           QuestionPaperView, SectionBlock, QuestionItem, DiagramChart
+        shared/           GenerationScreen (the document-animation loader)
+        layout/           Sidebar, ShellLayout, MobileDock, NavigationProgress
+      store/              Zustand: assignments, groups, user, notifications
+  packages/
+    shared/               @veda/shared: TypeScript types used by both apps
+  docs/                   README screenshots
+  pnpm-workspace.yaml     workspace definition (apps/* + packages/*)
+```
+
+Workspace level scripts run from the root:
+
+```bash
+pnpm dev         # api + web together via concurrently
+pnpm build       # shared, then api, then web
+pnpm typecheck   # tsc --noEmit across all three packages
+```
 
 ---
 
@@ -65,7 +113,7 @@ git clone https://github.com/chiragkhatri19/veda-ai.git
 cd veda-ai
 pnpm install
 
-# Start MongoDB and Redis (or point the env vars at Atlas + Upstash)
+# Start MongoDB and Redis locally, or point the env vars at Atlas + Upstash
 docker-compose up -d
 
 cp apps/api/.env.example apps/api/.env
@@ -113,7 +161,7 @@ Frontend runs at `http://localhost:3000`, API at `http://localhost:4000`.
 | AI | Google Gemini `gemini-2.5-flash` |
 | Testing | Vitest |
 | Monorepo | pnpm workspaces |
-| Deployed | Vercel (frontend) + Railway (backend) + Atlas + Upstash |
+| Deploy | Vercel (web) + Railway (api) + Atlas + Upstash |
 
 ---
 
@@ -125,23 +173,18 @@ pnpm --filter @veda/api test
 
 ---
 
-## Project structure
+## Limitations and what's next
 
-```
-veda-ai/
-  apps/
-    api/src/
-      queues/       worker.ts: the full generation pipeline lives here
-      utils/        promptBuilder.ts, responseParser.ts (and their tests)
-      services/     ai, assignment, pdf, rubric
-      socket/       Socket.IO server + progress emitter
-    web/
-      app/          one folder per route, loading.tsx skeleton for each
-      components/
-        output/     QuestionPaperView, SectionBlock, QuestionItem, DiagramChart
-        shared/     GenerationScreen (the document-animation loader)
-        layout/     Sidebar, MobileDock, NavigationProgress
-      store/        Zustand: assignments, groups, user, notifications
-  packages/
-    shared/         TypeScript types shared between api and web
-```
+Honest about the edges, since a take-home should be:
+
+- **No auth yet.** The app is single tenant. School and teacher identity live in a client side Zustand store, not behind a login. Multi user would need real sessions and per user data scoping.
+- **Reference material is truncated to 3000 characters.** Enough to steer the model, not enough for a full chapter. Chunking plus retrieval would lift that ceiling.
+- **One LLM provider.** The generation path is wired to Gemini. The prompt, parse, and validate seam is provider agnostic, but swapping models would mean a second adapter.
+- **Fallback diagram data is synthetic.** The safety net guarantees a chart always renders. It does not guarantee the numbers are pedagogically perfect when the model omits them. A targeted reprompt would be the stronger fix.
+- **Next:** auth plus multi tenant data, PDF export of the answer key as a separate sheet, and a question bank so papers can be assembled from vetted items instead of generated cold each time.
+
+---
+
+## License
+
+MIT. See [`package.json`](package.json).
