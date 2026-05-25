@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   description: 'AI-powered engine for generating print-ready, curriculum-aligned assessments at scale',
   icons: {
     icon: [
-      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
-      { url: '/logo.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logo.png', sizes: '512x512', type: 'image/png' },
     ],
-    shortcut: '/logo.png',
-    apple: { url: '/logo.png', sizes: '180x180', type: 'image/png' },
+    shortcut: '/favicon.svg',
+    apple: { url: '/logo.png', sizes: '512x512', type: 'image/png' },
   },
 };
 
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/logo.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         {/* FOUC prevention: dark is default; only opt out explicitly */}
         <script
           dangerouslySetInnerHTML={{

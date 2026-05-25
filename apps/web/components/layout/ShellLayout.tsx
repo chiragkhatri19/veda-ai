@@ -29,7 +29,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <div className="shell-root flex min-h-screen bg-app-bg print:block">
+    <div className="shell-root flex h-screen overflow-hidden bg-app-bg print:block print:h-auto print:overflow-visible">
       <NavigationProgress />
       <Sidebar
         open={sidebarOpen}
@@ -46,9 +46,9 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
         aria-hidden="true"
       />
 
-      <div className="flex flex-col flex-1 min-w-0 overflow-hidden print:block print:overflow-visible">
+      <div className="flex flex-col flex-1 min-w-0 min-h-0 overflow-hidden print:block print:overflow-visible">
         <TopBar onMenuToggle={() => setSidebarOpen((o) => !o)} />
-        <main className="flex-1 overflow-y-auto print:overflow-visible bg-app-bg pb-24 md:pb-0 print:pb-0">
+        <main className="flex-1 min-h-0 overflow-y-auto print:overflow-visible bg-app-bg pb-24 md:pb-0 print:pb-0">
           {children}
         </main>
       </div>
